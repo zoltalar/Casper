@@ -6,6 +6,5 @@
 
 try {
     window.$ = window.jQuery = require('jquery');
-
-    require('bootstrap');
+    window.Bootstrap = require('bootstrap');
 } catch (e) {}
