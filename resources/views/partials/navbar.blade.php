@@ -8,18 +8,12 @@
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
-            @guest
-                <li class="nav-item"><a href="{{ route('login') }}" class="nav-link">Login</a></li>
-                <li class="nav-item"><a href="{{ route('register') }}" class="nav-link">Register</a></li>
-            @endguest
-            <li class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" id="navbar-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu" aria-labelledby="navbar-dropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
+            @auth
+                <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+            @else
+                <li class="nav-item"><a href="{{ route('login') }}" class="nav-link"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
+                <li class="nav-item"><a href="{{ route('register') }}" class="nav-link"><i class="fa fa-user-o" aria-hidden="true"></i> Register</a></li>
+            @endauth
         </ul>
         <form class="form-inline my-2 my-md-0">
             <input class="form-control" type="text" placeholder="Search" aria-label="Search">

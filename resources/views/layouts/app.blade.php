@@ -11,7 +11,9 @@
     <body>
         <div class="container">
             @include('partials.navbar')
-            @yield('content')
+            <div class="content">
+                @yield('content')
+            </div>
         </div>
         <script src="{{ asset('js/app.js') }}"></script>
     </body>

@@ -1,75 +1,82 @@
 @extends('layouts.app')
-
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-
-                <div class="panel-body">
-                    <form class="form-horizontal" method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <div class="card border-0">
+            <div class="card-header">Register</div>
+            <div class="card-body">
+                {{ Form::open(['route' => 'register', 'novalidate' => 'novalidate']) }}
+                    <div class="form-group">
+                        {{ Form::label('input-first-name', 'First Name') }}
+                        {{ Form::text('first_name', old('first_name'), ['maxlength' => 100]) }}
+                        @if ($errors->has('first_name'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('first_name') }}
                             </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('input-last-name', 'Last Name') }}
+                        {{ Form::text('last_name', old('last_name'), ['maxlength' => 100]) }}
+                        @if ($errors->has('last_name'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('last_name') }}
                             </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('input-email', 'E-Mail Address') }}
+                        {{ Form::email('email') }}
+                        @if ($errors->has('email'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('email') }}
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('input-nick', 'Nick') }}
+                        {{ Form::text('nick', old('nick'), ['maxlength' => 40]) }}
+                        @if ($errors->has('nick'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('nick') }}
                             </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('input-password', 'Password') }}
+                        {{ Form::password('password') }}
+                        @if ($errors->has('password'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('password') }}
                             </div>
-                        </div>
-                    </form>
-                </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('input-password-confirmation', 'Confirm Password') }}
+                        {{ Form::password('password_confirmation') }}
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('input-dob', 'Date of Birth') }}
+                        {{ Form::date('dob') }}
+                        @if ($errors->has('dob'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('dob') }}
+                            </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        {{ Form::label('input-gender', 'Gender') }}
+                        {{ Form::select('gender', ['' => ''] + $genders) }}
+                        @if ($errors->has('gender'))
+                            <div class="invalid-feedback">
+                                {{ $errors->first('gender') }}
+                            </div>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        {{ Form::submit('Register') }}
+                    </div>
+                {{ Form::close() }}
             </div>
         </div>
     </div>
