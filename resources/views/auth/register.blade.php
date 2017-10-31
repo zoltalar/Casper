@@ -5,10 +5,10 @@
         <div class="card border-0">
             <div class="card-header">Register</div>
             <div class="card-body">
-                {{ Form::open(['route' => 'register', 'novalidate' => 'novalidate']) }}
+                {{ Form::open(['route' => 'register']) }}
                     <div class="form-group">
                         {{ Form::label('input-first-name', 'First Name') }}
-                        {{ Form::text('first_name', old('first_name'), ['maxlength' => 100]) }}
+                        {{ Form::text('first_name', null, ['maxlength' => 100, 'required' => 'required']) }}
                         @if ($errors->has('first_name'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('first_name') }}
@@ -17,7 +17,7 @@
                     </div>
                     <div class="form-group">
                         {{ Form::label('input-last-name', 'Last Name') }}
-                        {{ Form::text('last_name', old('last_name'), ['maxlength' => 100]) }}
+                        {{ Form::text('last_name', null, ['maxlength' => 100, 'required' => 'required']) }}
                         @if ($errors->has('last_name'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('last_name') }}
@@ -26,7 +26,7 @@
                     </div>
                     <div class="form-group">
                         {{ Form::label('input-email', 'E-Mail Address') }}
-                        {{ Form::email('email') }}
+                        {{ Form::email('email', null, ['required' => 'required']) }}
                         @if ($errors->has('email'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('email') }}
@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group">
                         {{ Form::label('input-nick', 'Nick') }}
-                        {{ Form::text('nick', old('nick'), ['maxlength' => 40]) }}
+                        {{ Form::text('nick', null, ['maxlength' => 40]) }}
                         @if ($errors->has('nick'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('nick') }}

@@ -9,7 +9,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body>
-        <div class="container">
+        <div id="app" class="container">
             @include('partials.navbar')
             <div class="content">
                 @yield('content')

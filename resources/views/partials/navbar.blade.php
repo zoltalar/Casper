@@ -9,12 +9,13 @@
                 <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
             @auth
-                <li class="nav-item"><a href="" class="nav-link"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+                <li class="nav-item"><a href="" class="nav-link" v-on:click="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
             @else
                 <li class="nav-item"><a href="{{ route('login') }}" class="nav-link"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
                 <li class="nav-item"><a href="{{ route('register') }}" class="nav-link"><i class="fa fa-user-o" aria-hidden="true"></i> Register</a></li>
             @endauth
         </ul>
+        {{ Form::open(['route' => 'logout', 'class' => 'd-none', 'ref' => 'formLogout']) }}{{ Form::close() }}
         <form class="form-inline my-2 my-md-0">
             <input class="form-control" type="text" placeholder="Search" aria-label="Search">
         </form>
