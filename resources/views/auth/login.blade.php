@@ -8,7 +8,7 @@
                     {{ Form::open(['route' => 'login']) }}
                         <div class="form-group">
                             {{ Form::label('input-email', 'Email Address or Nick') }}
-                            {{ Form::text('email') }}
+                            {{ Form::text('email', null, ['required' => 'required', 'autofocus' => 'autofocus']) }}
                             @if ($errors->has('email'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('email') }}
@@ -17,7 +17,7 @@
                         </div>
                         <div class="form-group">
                             {{ Form::label('input-password', 'Password') }}
-                            {{ Form::password('password') }}
+                            {{ Form::password('password', ['required' => 'required']) }}
                             @if ($errors->has('password'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('password') }}

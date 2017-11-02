@@ -8,7 +8,7 @@
                 {{ Form::open(['route' => 'register']) }}
                     <div class="form-group">
                         {{ Form::label('input-first-name', 'First Name') }}
-                        {{ Form::text('first_name', null, ['maxlength' => 100, 'required' => 'required']) }}
+                        {{ Form::text('first_name', null, ['maxlength' => 100, 'required' => 'required', 'autofocus' => 'autofocus']) }}
                         @if ($errors->has('first_name'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('first_name') }}
@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group">
                         {{ Form::label('input-nick', 'Nick') }}
-                        {{ Form::text('nick', null, ['maxlength' => 40]) }}
+                        {{ Form::text('nick', null, ['maxlength' => 40, 'required' => 'required']) }}
                         @if ($errors->has('nick'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('nick') }}
@@ -44,7 +44,7 @@
                     </div>
                     <div class="form-group">
                         {{ Form::label('input-password', 'Password') }}
-                        {{ Form::password('password') }}
+                        {{ Form::password('password', ['required' => 'required']) }}
                         @if ($errors->has('password'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('password') }}
@@ -53,11 +53,11 @@
                     </div>
                     <div class="form-group">
                         {{ Form::label('input-password-confirmation', 'Confirm Password') }}
-                        {{ Form::password('password_confirmation') }}
+                        {{ Form::password('password_confirmation', ['required' => 'required']) }}
                     </div>
                     <div class="form-group">
                         {{ Form::label('input-dob', 'Date of Birth') }}
-                        {{ Form::date('dob') }}
+                        {{ Form::date('dob', null, ['required' => 'required']) }}
                         @if ($errors->has('dob'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('dob') }}
@@ -66,7 +66,7 @@
                     </div>
                     <div class="form-group">
                         {{ Form::label('input-gender', 'Gender') }}
-                        {{ Form::select('gender', ['' => ''] + $genders) }}
+                        {{ Form::select('gender', ['' => ''] + $genders, null, ['required' => 'required']) }}
                         @if ($errors->has('gender'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('gender') }}

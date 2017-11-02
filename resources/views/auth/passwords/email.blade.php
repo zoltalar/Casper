@@ -10,24 +10,21 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
-                        {{ csrf_field() }}
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="control-label">E-Mail Address</label>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                    {{ Form::open(['route' => 'password.email']) }}
+                        <div class="form-group">
+                            {{ Form::label('input-email', 'Email Address') }}
+                            {{ Form::text('email', null, ['required' => 'required', 'autofocus' => 'autofocus']) }}
                             @if ($errors->has('email'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('email') }}</strong>
-                                </span>
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('email') }}
+                                </div>
                             @endif
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">
-                                Send Password Reset Link
-                            </button>
+                            {{ Form::submit('Send Password Reset Link') }}
                             <a class="btn btn-link" href="{{ route('login') }}">Cancel</a>
                         </div>
-                    </form>
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>
