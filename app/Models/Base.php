@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 abstract class Base extends Model
 {
+    const DEFAULT_STRING_LENGTH = 191;
+
     /**
      * Constraints prohibiting the object from being deleted.
      *

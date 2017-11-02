@@ -12241,6 +12241,10 @@ a.text-dark:hover {
   clip: auto;
 }
 
+textarea {
+  resize: none;
+}
+
 .content {
   margin: 30px 0;
 }

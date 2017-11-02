@@ -2,6 +2,7 @@
 
 namespace App\Extensions\Collective;
 
+use App\Models\Base;
 use Illuminate\Support\ViewErrorBag;
 
 class FormBuilder extends \Collective\Html\FormBuilder
@@ -46,7 +47,7 @@ class FormBuilder extends \Collective\Html\FormBuilder
             if ($type == 'password') {
                 $options['maxlength'] = 40;
             } else if (in_array($type, ['text', 'search', 'email', 'tel', 'number', 'url'])) {
-                $options['maxlength'] = 191;
+                $options['maxlength'] = Base::DEFAULT_STRING_LENGTH;
             }
         }
 

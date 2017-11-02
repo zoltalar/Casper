@@ -1,15 +1,22 @@
+// --------------------------------------------------
+// Includes
+// --------------------------------------------------
 
-// Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
-// Variables
 @import "variables";
-
-// Third Party
 @import "~bootstrap/scss/bootstrap";
 @import "~font-awesome/scss/font-awesome";
 
+
+// --------------------------------------------------
 // Page Components
+// --------------------------------------------------
+
+textarea {
+  resize: none;
+}
+
 .content {
   margin: 30px 0;
 }
