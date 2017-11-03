@@ -9,7 +9,7 @@
                 <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
             </li>
             @auth
-                <li class="nav-item"><a href="" class="nav-link" v-on:click="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+                <li class="nav-item"><a href="{{ route('home') }}" class="nav-link" v-on:click="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
             @else
                 <li class="nav-item"><a href="{{ route('login') }}" class="nav-link"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>
                 <li class="nav-item"><a href="{{ route('register') }}" class="nav-link"><i class="fa fa-user-o" aria-hidden="true"></i> Register</a></li>

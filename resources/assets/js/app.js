@@ -13,8 +13,16 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('alert', require('./components/alert'));
+
 const app = new Vue({
     el: '#app',
+    data: {
+        'event': {
+            allDay: false
+        }
+    }
+    ,
     methods: {
         logout: function(event) {
             event.preventDefault();

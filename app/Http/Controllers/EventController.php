@@ -24,7 +24,19 @@ class EventController extends Controller
         $validator = Validator::make($data, $rules);
 
         if ($validator->fails()) {
-            echo 'test';
+            return redirect()
+                ->route('event.create')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $event = new Event();
+            $event->fill($data);
+
+            if ($event->save()) {
+                session()->flash('message', 'Event has been created successfully.');
+            }
+
+            return redirect()->route('home');
         }
     }
 }

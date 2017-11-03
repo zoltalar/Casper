@@ -5,11 +5,6 @@ use Illuminate\Database\Seeder;
 
 class RolesUsersTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         $bindings = ['1' => '1'];

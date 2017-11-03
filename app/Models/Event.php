@@ -12,7 +12,8 @@ class Event extends Base
     {
         return [
             'name' => 'required|string',
-            'description' => 'required|string'
+            'description' => 'required|string',
+            'date' => 'required|date'
         ];
     }
 }
