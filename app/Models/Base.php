@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Schema;
 
 abstract class Base extends Model
 {
@@ -15,27 +14,6 @@ abstract class Base extends Model
      * @var array
      */
     protected $deleteConstraints = [];
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function($model) {
-            if (Schema::hasColumn($model->getTable(), 'created_by')) {
-                if ($model->created_by === null) {
-                    $model->created_by = auth()->user()->id;
-                }
-            }
-        });
-
-        static::updating(function($model) {
-            if (Schema::hasColumn($model->getTable(), 'updated_by')) {
-                if ($model->updated_by === null) {
-                    $model->updated_by = auth()->user()->id;
-                }
-            }
-        });
-    }
 
     /**
      * Override

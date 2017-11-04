@@ -2,8 +2,13 @@
 
 namespace App\Models;
 
-class Event extends Base
+use App\Contracts\Userstamp;
+use App\Traits\Userstampable;
+
+class Event extends Base implements Userstamp
 {
+    use Userstampable;
+
     protected $table = 'events';
 
     protected $guarded = ['id'];
