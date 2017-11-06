@@ -39,4 +39,15 @@ class EventController extends Controller
             return redirect()->route('home');
         }
     }
+
+    public function show($name, $id)
+    {
+        $event = Event::find($id);
+
+        if ($event === null) {
+            return redirect()->route('home');
+        }
+
+        return view('events/show', compact('event'));
+    }
 }

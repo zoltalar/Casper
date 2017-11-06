@@ -13,6 +13,18 @@ class Event extends Base implements Userstamp
 
     protected $guarded = ['id'];
 
+    public function meta()
+    {
+        $meta = [$this->date];
+
+        if ( (int) $this->all_day != 1) {
+            $meta[] = 'at';
+            $meta[] = $this->time;
+        }
+
+        return implode(' ', $meta);
+    }
+
     public static function rules()
     {
         return [
