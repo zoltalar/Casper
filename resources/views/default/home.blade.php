@@ -9,11 +9,14 @@
         @foreach ($events as $event)
             <div class="card bg-light border-0 mb-4">
                 <div class="card-body">
-                    <h5 class="mb-2">
+                    <h5 class="mb-3">
                         <a href="{{ route('event.show', ['name' => str_slug($event->name), 'id' => $event->id]) }}">{{ $event->name }}</a>
                     </h5>
-                    <p class="text-muted mb-2">
+                    <p class="text-muted mb-1">
                         {{ $event->meta() }}
+                    </p>
+                    <p class="text-muted mb-3">
+                        {{ $event->address(',') }}
                     </p>
                     <p class="mb-0">{{ \App\Extensions\Str::words($event->description, 30) }}</p>
                 </div>

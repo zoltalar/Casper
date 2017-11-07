@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Contracts\Address;
 use App\Contracts\Userstamp;
+use App\Traits\Addressable;
 use App\Traits\Userstampable;
 
-class Event extends Base implements Userstamp
+class Event extends Base implements Address, Userstamp
 {
-    use Userstampable;
+    use Addressable, Userstampable;
 
     protected $table = 'events';
 

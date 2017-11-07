@@ -21,9 +21,19 @@ class CreateEventsTable extends Migration
             $table->time('time')->nullable();
             $table->boolean('all_day')->default(0)->nullable();
             $table->boolean('public')->default(0)->nullable();
+            $table->string('address', 100);
+            $table->string('address_2', 100)->nullable();
+            $table->string('city', 60);
+            $table->integer('state_id')->unsigned()->nullable();
+            $table->string('postal_code', 15);
             $table->timestamps();
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
+
+            $table->foreign('state_id', 'fk_events_states')
+                ->references('id')
+                ->on('states')
+                ->onDelete('set null');
 
             $table->foreign('created_by', 'fk_events_creators')
                 ->references('id')
