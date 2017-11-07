@@ -1,13 +1,11 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
-    <a class="navbar-brand" href="#">{{ config('app.name', 'Casper') }}</a>
+    <a class="navbar-brand" href="{{ route('home') }}">{{ config('app.name', 'Casper') }}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-primary" aria-controls="navbar-primary" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbar-primary">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ route('home') }}">Home <span class="sr-only">(current)</span></a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
             @auth
                 <li class="nav-item"><a href="{{ route('home') }}" class="nav-link" v-on:click="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
             @else
