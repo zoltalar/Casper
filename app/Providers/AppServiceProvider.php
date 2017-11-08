@@ -18,6 +18,12 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(Base::DEFAULT_STRING_LENGTH);
 
+        // Register 'enum' type for Doctrine
+        Schema::getConnection()
+            ->getDoctrineSchemaManager()
+            ->getDatabasePlatform()
+            ->registerDoctrineTypeMapping('enum', 'string');
+
         // Use Bootstrap 4 pagination views
         Paginator::$defaultView = 'pagination::bootstrap-4';
         Paginator::$defaultSimpleView = 'pagination::simple-bootstrap-4';

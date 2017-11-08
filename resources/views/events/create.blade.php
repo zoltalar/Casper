@@ -5,7 +5,7 @@
             <div class="card border-0">
                 <div class="card-header">Create Event</div>
                 <div class="card-body">
-                    {{ Form::open(['route' => 'event.store', 'novalidate' => 'novalidate']) }}
+                    {{ Form::open(['route' => 'event.store', 'table' => 'events']) }}
                         <div class="form-group">
                             {{ Form::label('input-name', 'Event Name') }}
                             {{ Form::text('name', null, ['required' => 'required', 'autofocus' => 'autofocus']) }}
@@ -44,6 +44,12 @@
                                     All Day Event
                                 </label>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            {{ Form::label('input-address', 'Address') }}
+                            {{ Form::text('address') }}
+                        </div>
+                        <div class="form-group">
                             <div class="form-check">
                                 <label class="form-check-label">
                                     {{ Form::checkbox('public') }}

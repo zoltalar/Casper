@@ -5,10 +5,10 @@
         <div class="card border-0">
             <div class="card-header">Register</div>
             <div class="card-body">
-                {{ Form::open(['route' => 'register']) }}
+                {{ Form::open(['route' => 'register', 'table' => 'users']) }}
                     <div class="form-group">
                         {{ Form::label('input-first-name', 'First Name') }}
-                        {{ Form::text('first_name', null, ['maxlength' => 100, 'required' => 'required', 'autofocus' => 'autofocus']) }}
+                        {{ Form::text('first_name', null, ['required' => 'required', 'autofocus' => 'autofocus']) }}
                         @if ($errors->has('first_name'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('first_name') }}
@@ -17,7 +17,7 @@
                     </div>
                     <div class="form-group">
                         {{ Form::label('input-last-name', 'Last Name') }}
-                        {{ Form::text('last_name', null, ['maxlength' => 100, 'required' => 'required']) }}
+                        {{ Form::text('last_name', null, ['required' => 'required']) }}
                         @if ($errors->has('last_name'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('last_name') }}
@@ -35,7 +35,7 @@
                     </div>
                     <div class="form-group">
                         {{ Form::label('input-nick', 'Nick') }}
-                        {{ Form::text('nick', null, ['maxlength' => 40, 'required' => 'required']) }}
+                        {{ Form::text('nick', null, ['required' => 'required']) }}
                         @if ($errors->has('nick'))
                             <div class="invalid-feedback">
                                 {{ $errors->first('nick') }}
