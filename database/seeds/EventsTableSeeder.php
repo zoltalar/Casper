@@ -42,7 +42,7 @@ class EventsTableSeeder extends Seeder
      * Retrieve single or a list of real addresses.
      *
      * @param   boolean $random generate random address
-     * @return  array
+     * @return  \Illuminate\Support\Collection|mixed
      */
     public function addresses($random = false)
     {
