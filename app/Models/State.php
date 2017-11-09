@@ -14,4 +14,26 @@ class State extends Base
     {
         return $this->belongsTo('App\Models\Country');
     }
+
+    /**
+     * Generate states list for <select> element.
+     *
+     * @return  array
+     */
+    public static function states()
+    {
+        $states = [];
+
+        $models = static::with('country')
+            ->orderBy('name', 'asc')
+            ->get();
+
+        foreach ($models as $model) {
+            $states[$model->country->name][$model->id] = $model->name;
+        }
+
+        ksort($states, SORT_STRING);
+
+        return $states;
+    }
 }

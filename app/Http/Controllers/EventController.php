@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Validator;
 use App\Models\Event;
+use App\Models\State;
 
 class EventController extends Controller
 {
@@ -14,7 +15,9 @@ class EventController extends Controller
 
     public function create()
     {
-        return view('events/create');
+        $states = State::states();
+
+        return view('events/create', compact('states'));
     }
 
     public function store()

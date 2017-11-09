@@ -93,6 +93,10 @@ class FormBuilder extends \Collective\Html\FormBuilder
             unset($options['table']);
         }
 
+        if ( ! array_key_exists('novalidate', $options)) {
+            $options['novalidate'] = 'novalidate';
+        }
+
         return parent::open($options);
     }
 

@@ -48,6 +48,42 @@
                         <div class="form-group">
                             {{ Form::label('input-address', 'Address') }}
                             {{ Form::text('address') }}
+                            @if ($errors->has('address'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('address') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            {{ Form::label('input-address-2', 'Address 2') }}
+                            {{ Form::text('address_2') }}
+                        </div>
+                        <div class="form-group">
+                            {{ Form::label('input-city', 'City') }}
+                            {{ Form::text('city') }}
+                            @if ($errors->has('city'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('city') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            {{ Form::label('input-state-id', 'State') }}
+                            {{ Form::select('state_id', $states) }}
+                            @if ($errors->has('state_id'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('state_id') }}
+                                </div>
+                            @endif
+                        </div>
+                        <div class="form-group">
+                            {{ Form::label('input-postal-code', 'Postal Code') }}
+                            {{ Form::text('postal_code') }}
+                            @if ($errors->has('postal_code'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('postal_code') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="form-group">
                             <div class="form-check">

@@ -32,7 +32,11 @@ class Event extends Base implements Address, Userstamp
         return [
             'name' => 'required|string',
             'description' => 'required|string',
-            'date' => 'required|date'
+            'date' => 'required|date',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'state_id' => 'required',
+            'postal_code' => 'required|digits:5'
         ];
     }
 }
