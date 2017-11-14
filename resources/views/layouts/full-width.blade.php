@@ -11,8 +11,10 @@
     <body>
         <div id="app" class="container">
             @include('partials.navbar')
-            <div class="content">
-                @yield('content')
+            <div class="inner">
+                <div class="content">
+                    @yield('content')
+                </div>
             </div>
         </div>
         <script src="{{ asset('js/app.js') }}"></script>

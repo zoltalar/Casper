@@ -7,20 +7,11 @@ trait Userstampable
     /**
      * Boot userstampable trait for a model.
      *
-     * @return void
+     * @return  void
      */
     public static function bootUserstampable()
     {
-        static::registerEvents();
-    }
-
-    /**
-     * Register model events to listen to.
-     *
-     * @return void
-     */
-    public static function registerEvents()
-    {
+        // Register model events to listen to
         static::creating(function($model) {
             if ($model->created_by === null) {
                 $model->created_by = auth()->id();

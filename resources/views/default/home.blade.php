@@ -1,10 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.content-sidebar')
 @section('content')
     @if (session()->has('message'))
         <alert class="alert-success">{{ session()->get('message') }}</alert>
     @endif
-    <a href="{{ route('event.create') }}" class="btn btn-info pull-right">Create Event</a>
     <h3 class="mb-4">Upcoming Events</h3>
+    <p class="mb-4">
+        <a href="{{ route('event.create') }}" class="btn btn-info">Create Event</a>
+    </p>
     @if ($events->count() > 0)
         @foreach ($events as $event)
             <div class="card bg-light border-0 mb-4">

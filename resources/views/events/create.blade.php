@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.full-width')
 @section('content')
     <div class="row">
         <div class="col-md-6 mx-auto">

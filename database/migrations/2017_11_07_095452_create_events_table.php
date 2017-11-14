@@ -25,6 +25,8 @@ class CreateEventsTable extends Migration
             $table->string('city', 60);
             $table->integer('state_id')->unsigned()->nullable();
             $table->string('postal_code', 15);
+            $table->decimal('latitude', 10, 8)->nullable();
+            $table->decimal('longitude', 11, 8)->nullable();
             $table->boolean('public')->default(0)->nullable();
             $table->timestamps();
             $table->integer('created_by')->unsigned()->nullable();
