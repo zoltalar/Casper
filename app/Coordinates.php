@@ -44,31 +44,39 @@ class Coordinates
      * Get or set latitude.
      *
      * @param   double|null $latitude
-     * @return  \App\Coordinates|double|null
+     * @return  void|double|null
      */
     public function latitude($latitude = null)
     {
         if ($latitude !== null) {
             $this->latitude = $latitude;
-            return $this;
+        } else {
+            return $this->latitude;
         }
-
-        return $this->latitude;
     }
 
     /**
      * Get or set longitude.
      *
      * @param   double|null $longitude
-     * @return  \App\Coordinates|double|null
+     * @return  void|double|null
      */
     public function longitude($longitude = null)
     {
         if ($longitude !== null) {
             $this->longitude = $longitude;
-            return $this;
+        } else {
+            return $this->longitude;
         }
+    }
 
-        return $this->longitude;
+    /**
+     * Determine if coordinates are empty.
+     *
+     * @return  bool
+     */
+    public function empty()
+    {
+        return ($this->latitude === null && $this->longitude === null);
     }
 }

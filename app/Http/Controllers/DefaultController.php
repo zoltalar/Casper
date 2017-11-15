@@ -15,10 +15,10 @@ class DefaultController extends Controller
         $address = Event::generateAddress($data, $rules, ',');
         $coordinates = Event::resolveAddress($address);
 
-        $latitude = $coordinates->latitude();
-        $longitude = $coordinates->longitude();
+        if ( ! $coordinates->empty()) {
+            $latitude = $coordinates->latitude();
+            $longitude = $coordinates->longitude();
 
-        if ($latitude !== null) {
             $events = Event::haversine($latitude, $longitude)
                 ->where('date', '>=', Carbon::now()->format('Y-m-d'))
                 ->orderBy('date', 'asc')
@@ -31,6 +31,6 @@ class DefaultController extends Controller
                 ->simplePaginate(4);
         }
 
-        return view('default/home', compact('address', 'events'));
+        return view('default/home', compact('address', 'coordinates', 'events'));
     }
 }

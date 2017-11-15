@@ -48,7 +48,7 @@ trait Coordinable
         return $coordinates;
     }
 
-    public static function haversine($latitude, $longitude, $radius = 10)
+    public static function haversine($latitude, $longitude, $radius = 20)
     {
         $formula = '( 3959 * acos( cos( radians(?) ) * cos( radians( `latitude` ) ) * cos( radians( `longitude` ) - radians(?) ) + sin( radians(?) ) * sin( radians( `latitude` ) ) ) ) AS `distance`';
 

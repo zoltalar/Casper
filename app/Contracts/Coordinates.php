@@ -20,5 +20,5 @@ interface Coordinates
      * @param   int $radius
      * @return  \Illuminate\Database\Eloquent\Builder
      */
-    public static function haversine($latitude, $longitude, $radius = 10);
+    public static function haversine($latitude, $longitude, $radius = 20);
 }
