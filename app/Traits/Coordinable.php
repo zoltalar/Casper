@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Contracts\Address;
+use App\Coordinates;
 
 trait Coordinable
 {
@@ -16,28 +17,32 @@ trait Coordinable
         // Register model events to listen to
         static::saving(function($model) {
             if ($model instanceof Address) {
-                $coordinates = $model->resolve($model->address(','));
+                $address = $model->address(',');
+                $coordinates = $model->resolveAddress($address);
 
-                $model->latitude = $coordinates[0];
-                $model->longitude = $coordinates[1];
+                $model->latitude = $coordinates->latitude();
+                $model->longitude = $coordinates->longitude();
             }
         });
     }
 
-    public function resolve($address)
+    public static function resolveAddress($address)
     {
-        $coordinates = [null, null];
+        $coordinates = new Coordinates();
 
-        $contents = file_get_contents('https://maps.google.com/maps/api/geocode/json?address=' . urlencode($address));
-        $response = json_decode($contents);
+        if ( ! empty($address)) {
+            $url = 'https://maps.google.com/maps/api/geocode/json?address=' . urlencode($address);
 
-        if (isset($response->results[0]->geometry->location)) {
-            $location = $response->results[0]->geometry->location;
+            if ($contents = file_get_contents($url)) {
+                $response = json_decode($contents);
 
-            $coordinates = [
-                $location->lat,
-                $location->lng
-            ];
+                if (isset($response->results[0]->geometry->location)) {
+                    $location = $response->results[0]->geometry->location;
+
+                    $coordinates->latitude($location->lat);
+                    $coordinates->longitude($location->lng);
+                }
+            }
         }
 
         return $coordinates;

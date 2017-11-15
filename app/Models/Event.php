@@ -29,9 +29,9 @@ class Event extends Base implements Address, Coordinates, Userstamp
         return implode(' ', $meta);
     }
 
-    public static function rules()
+    public static function rules(array $keys = null)
     {
-        return [
+        $rules = [
             'name' => 'required|string',
             'description' => 'required|string',
             'date' => 'required|date',
@@ -40,10 +40,11 @@ class Event extends Base implements Address, Coordinates, Userstamp
             'state_id' => 'required',
             'postal_code' => 'required|digits:5'
         ];
-    }
 
-    public static function radius($distance = 10)
-    {
+        if ( ! empty($keys)) {
+            return array_only($rules, $keys);
+        }
 
+        return $rules;
     }
 }

@@ -18,4 +18,14 @@ interface Address
      * @return  \Illuminate\Database\Eloquent\Relations\Relation
      */
     public function state();
+
+    /**
+     * Generate address information from array.
+     *
+     * @param   array|null $data
+     * @param   array $rules
+     * @param   string $glue
+     * @return  string
+     */
+    public static function generateAddress(array $data, array $rules, $glue);
 }

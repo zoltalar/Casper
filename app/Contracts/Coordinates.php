@@ -5,15 +5,15 @@ namespace App\Contracts;
 interface Coordinates
 {
     /**
-     * Resolve address to latitude and longitude.
+     * Retrieve coordinates of an address.
      *
      * @param   string $address
-     * @return  array
+     * @return  \App\Coordinates
      */
-    public function resolve($address);
+    public static function resolveAddress($address);
 
     /**
-     * Perform search within specific radius.
+     * Perform search within specific radius of a coordinate.
      *
      * @param   double $latitude
      * @param   double $longitude
