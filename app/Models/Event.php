@@ -47,4 +47,14 @@ class Event extends Base implements Address, Coordinates, Userstamp
 
         return $rules;
     }
+
+    public static function radii()
+    {
+        return [
+            '5' => '5 miles',
+            '10' => '10 miles',
+            '20' => '20 miles',
+            '50' => '50 miles'
+        ];
+    }
 }
