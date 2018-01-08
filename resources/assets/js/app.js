@@ -21,8 +21,7 @@ const app = new Vue({
         'event': {
             allDay: false
         }
-    }
-    ,
+    },
     methods: {
         logout: function(event) {
             event.preventDefault();

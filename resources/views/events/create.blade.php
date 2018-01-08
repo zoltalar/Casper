@@ -86,6 +86,19 @@
                             @endif
                         </div>
                         <div class="form-group">
+                            {{ Form::label('input-max-attendees', 'Max Attendees') }}
+                            {{ Form::text('max_attendees') }}
+                            @if ($errors->has('max_attendees'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('max_attendees') }}
+                                </div>
+                            @else
+                                <small class="form-text text-muted">
+                                    Leave field empty for unlimited attendees.
+                                </small>
+                            @endif
+                        </div>
+                        <div class="form-group">
                             <div class="form-check">
                                 <label class="form-check-label">
                                     {{ Form::checkbox('public') }}

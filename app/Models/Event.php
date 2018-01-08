@@ -38,7 +38,8 @@ class Event extends Base implements Address, Coordinates, Userstamp
             'address' => 'required|string',
             'city' => 'required|string',
             'state_id' => 'required',
-            'postal_code' => 'required|digits:5'
+            'postal_code' => 'required|digits:5',
+            'max_attendees' => 'nullable|numeric'
         ];
 
         if ( ! empty($keys)) {

@@ -1,4 +1,4 @@
-@extends('layouts.full-width')
+@extends('layouts.content-sidebar')
 @section('content')
     <h3 class="mb-3">{{ $event->name }}</h3>
     <p class="text-muted mb-1">
