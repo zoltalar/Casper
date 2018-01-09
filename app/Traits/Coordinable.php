@@ -8,6 +8,13 @@ use App\Coordinates;
 trait Coordinable
 {
     /**
+     * Google Maps API key.
+     *
+     * @var string
+     */
+    private static $key = 'AIzaSyDNtKQ2kM5ib1aEzdNC5LLs-SFzOeupNP8';
+
+    /**
      * Boot coordinable trait for a model.
      *
      * @return  void
@@ -31,7 +38,8 @@ trait Coordinable
         $coordinates = new Coordinates();
 
         if ( ! empty($address)) {
-            $url = 'https://maps.google.com/maps/api/geocode/json?address=' . urlencode($address);
+            $url = 'https://maps.google.com/maps/api/geocode/json?address=%s&key=%s';
+            $url = sprintf($url, urlencode($address), urlencode(self::$key));
 
             if ($contents = file_get_contents($url)) {
                 $response = json_decode($contents);

@@ -19,6 +19,6 @@ class Controller extends BaseController
         view()->share('address', null);
         view()->share('coordinates', null);
         view()->share('radii', $radii);
-        view()->share('radius', 10);
+        view()->share('radius', 5);
     }
 }

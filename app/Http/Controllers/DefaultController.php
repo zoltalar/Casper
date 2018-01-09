@@ -11,7 +11,7 @@ class DefaultController extends Controller
     {
         $data = request()->all();
         $rules = Event::rules();
-        $radius = array_get($data, 'radius', 10);
+        $radius = array_get($data, 'radius', 5);
 
         $address = Event::generateAddress($data, $rules, ',');
         $coordinates = Event::resolveAddress($address);
@@ -20,17 +20,19 @@ class DefaultController extends Controller
             $latitude = $coordinates->latitude();
             $longitude = $coordinates->longitude();
 
-            $events = Event::haversine($latitude, $longitude)
-                ->where('date', '>=', Carbon::now()->format('Y-m-d'))
-                ->orderBy('date', 'asc')
-                ->simplePaginate(4);
+            $events = Event::haversine($latitude, $longitude);
         } else {
-            $events = Event::where('public', 1)
-                ->where('date', '>=', Carbon::now()->format('Y-m-d'))
-                ->orderBy('date', 'asc')
-                ->take(10)
-                ->simplePaginate(4);
+            $events = Event::where('id', '>', 0)->take(10);
         }
+
+        $events->where('date', '>=', Carbon::now()->format('Y-m-d'));
+
+        if (auth()->guest()) {
+            $events->where('public', 1);
+        }
+
+        $events->orderBy('date', 'asc');
+        $events = $events->simplePaginate(4);
 
         $data = compact( 'address', 'coordinates', 'events', 'radius');
 
