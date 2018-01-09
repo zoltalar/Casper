@@ -11,8 +11,7 @@ class DefaultController extends Controller
     {
         $data = request()->all();
         $rules = Event::rules();
-        $radii = Event::radii();
-        $radius = array_get($data, 'radius', 5);
+        $radius = array_get($data, 'radius', 10);
 
         $address = Event::generateAddress($data, $rules, ',');
         $coordinates = Event::resolveAddress($address);
@@ -33,7 +32,7 @@ class DefaultController extends Controller
                 ->simplePaginate(4);
         }
 
-        $data = compact( 'address', 'coordinates', 'events', 'radii', 'radius');
+        $data = compact( 'address', 'coordinates', 'events', 'radius');
 
         return view('default/home', $data);
     }

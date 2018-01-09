@@ -11,6 +11,8 @@ class EventController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except('show');
+
+        parent::__construct();
     }
 
     public function create()
@@ -51,6 +53,36 @@ class EventController extends Controller
             return redirect()->route('home');
         }
 
-        return view('events/show', compact('event'));
+        $id = auth()->id();
+        $users = $event->users()->get();
+        $attend = true;
+
+        if ($users->contains($id)) {
+            $attend = false;
+        }
+
+        return view('events/show', compact('event', 'attend', 'users'));
+    }
+
+    public function attend($id)
+    {
+        $event = Event::find($id);
+
+        if ($event === null) {
+            return redirect()->route('home');
+        }
+
+        $id = auth()->id();
+
+        if ($event->users()->get()->contains($id)) {
+            $event->users()->detach($id);
+        } else {
+            $event->users()->attach($id);
+        }
+
+        return redirect()->route('event.show', [
+            'name' => str_slug($event->name),
+            'id' => $event->id
+        ]);
     }
 }

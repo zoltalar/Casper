@@ -15,6 +15,7 @@ Auth::routes();
 
 Route::get('/', ['as' => 'home', 'uses' => 'DefaultController@home']);
 
+Route::get('events/attend/{id}', ['as' => 'event.attend', 'uses' => 'EventController@attend']);
 Route::get('events/{name}/{id}', ['as' => 'event.show', 'uses' => 'EventController@show']);
 Route::get('events/create', ['as' => 'event.create', 'uses' => 'EventController@create']);
 Route::post('events/store', ['as' => 'event.store', 'uses' => 'EventController@store']);

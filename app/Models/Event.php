@@ -17,6 +17,11 @@ class Event extends Base implements Address, Coordinates, Userstamp
 
     protected $guarded = ['id'];
 
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User', 'events_users');
+    }
+
     public function meta()
     {
         $meta = [$this->date];

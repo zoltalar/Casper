@@ -10,19 +10,19 @@
         <a href="{{ route('event.create') }}" class="btn btn-info">Create Event</a>
     </p>
     @if ($events->count() > 0)
-        @foreach ($events as $event)
+        @foreach ($events as $_event)
             <div class="card bg-light border-0 mb-4">
                 <div class="card-body">
                     <h5 class="mb-3">
-                        <a href="{{ route('event.show', ['name' => str_slug($event->name), 'id' => $event->id]) }}">{{ $event->name }}</a>
+                        <a href="{{ route('event.show', ['name' => str_slug($_event->name), 'id' => $_event->id]) }}">{{ $_event->name }}</a>
                     </h5>
                     <p class="text-muted mb-1">
-                        {{ $event->meta() }}
+                        {{ $_event->meta() }}
                     </p>
                     <p class="text-muted mb-3">
-                        {{ $event->address(',') }}
+                        {{ $_event->address(',') }}
                     </p>
-                    <p class="mb-0">{{ \App\Extensions\Str::words($event->description, 30) }}</p>
+                    <p class="mb-0">{{ \App\Extensions\Str::words($_event->description, 30) }}</p>
                 </div>
             </div>
         @endforeach
