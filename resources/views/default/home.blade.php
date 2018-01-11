@@ -13,9 +13,6 @@
         @foreach ($events as $_event)
             <div class="card bg-light border-0 mb-4">
                 <div class="card-body">
-                    @if ($_event->users()->get()->contains(auth()->id()))
-                        <span class="badge badge-success pull-right">Attending</span>
-                    @endif
                     <h5 class="mb-3">
                         <a href="{{ route('event.show', ['name' => str_slug($_event->name), 'id' => $_event->id]) }}">{{ $_event->name }}</a>
                     </h5>
@@ -25,7 +22,19 @@
                     <p class="text-muted mb-3">
                         {{ $_event->address(',') }}
                     </p>
-                    <p class="mb-0">{{ \App\Extensions\Str::words($_event->description, 30) }}</p>
+                    <p>
+                        {{ \App\Extensions\Str::words($_event->description, 30) }}
+                    </p>
+                    <p class="mb-0">
+                        @if ( (int) $_event->public == 1)
+                            <span class="badge badge-info">Public Event</span>
+                        @else
+                            <span class="badge badge-secondary">Private Event</span>
+                        @endif
+                        @if ($_event->users()->get()->contains(auth()->id()))
+                            <span class="badge badge-success">Attending</span>
+                        @endif
+                    </p>
                 </div>
             </div>
         @endforeach

@@ -19,3 +19,6 @@ Route::get('events/attend/{id}', ['as' => 'event.attend', 'uses' => 'EventContro
 Route::get('events/{name}/{id}', ['as' => 'event.show', 'uses' => 'EventController@show']);
 Route::get('events/create', ['as' => 'event.create', 'uses' => 'EventController@create']);
 Route::post('events/store', ['as' => 'event.store', 'uses' => 'EventController@store']);
+Route::post('events/invite', ['as' => 'event.invite', 'uses' => 'EventController@invite']);
+
+Route::get('users/load', ['as' => 'user.load', 'uses' => 'UserController@load']);

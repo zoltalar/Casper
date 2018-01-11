@@ -14,6 +14,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('alert', require('./components/alert'));
+Vue.component('autocomplete', require('./components/autocomplete'));
 
 const app = new Vue({
     el: '#app',

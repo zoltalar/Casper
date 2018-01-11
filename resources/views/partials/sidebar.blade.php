@@ -1,9 +1,18 @@
 @if (isset($event))
+    <h3 class="mb-4">Event Options</h3>
     @if ( (int) $event->public == 1)
-        <h3 class="mb-4">Event Options</h3>
         <p class="mb-4">
             <a href="{{ route('event.attend', ['id' => $event->id]) }}" class="btn btn-info">@if ($attend) Attend @else Unattend @endif</a>
         </p>
+    @else
+        {{ Form::open(['route' => 'event.invite', 'class' => 'form-inline', 'autocomplete' => 'off']) }}
+            <div class="form-group">
+                <autocomplete name="email"></autocomplete>
+            </div>
+            <div class="form-group ml-2">
+                {{ Form::submit('Invite') }}
+            </div>
+        {{ Form::close() }}
     @endif
     @if ($users->count() > 0)
         <h5>Attendees</h5>

@@ -94,7 +94,7 @@ class FormBuilder extends \Collective\Html\FormBuilder
         }
 
         if ( ! array_key_exists('novalidate', $options)) {
-            $options['novalidate'] = 'novalidate';
+            // $options['novalidate'] = 'novalidate';
         }
 
         return parent::open($options);
