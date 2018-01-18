@@ -8,9 +8,17 @@ class UserController extends Controller
 {
     public function load()
     {
-        return User::search(['first_name', 'last_name', 'email'])
-            ->take(5)
+        $users = User::search(['first_name', 'last_name', 'email'])
+            ->take(8)
             ->get()
-            ->toJson();
+            ->map(function($user) {
+                return [
+                    'id' => $user->id,
+                    'name' => $user->fullName(),
+                    'email' => $user->email
+                ];
+            });
+
+        return $users;
     }
 }

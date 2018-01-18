@@ -7,7 +7,7 @@
     @else
         {{ Form::open(['route' => 'event.invite', 'class' => 'form-inline', 'autocomplete' => 'off']) }}
             <div class="form-group">
-                <autocomplete name="email"></autocomplete>
+                <autocomplete :source="'/users/load'"></autocomplete>
             </div>
             <div class="form-group ml-2">
                 {{ Form::submit('Invite') }}

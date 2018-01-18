@@ -14,11 +14,13 @@
     "laravel-mix": "^1.0"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "bootstrap": "^4.0.0-beta",
     "font-awesome": "^4.7.0",
     "jquery": "^3.1.1",
     "ol": "^4.6.4",
     "popper.js": "^1.12.5",
+    "underscore": "^1.8.3",
     "vue": "^2.5.2"
   }
 }
