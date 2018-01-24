@@ -114,7 +114,11 @@ class EventController extends Controller
 
         if ($validator->passes()) {
             $id = $data['user_id'];
-            $event->users()->attach($id, ['invited' => 1]);
+            $user = $event->user($id);
+
+            if ($user === null) {
+                $event->users()->attach($id, ['invited' => 1]);
+            }
         }
 
         return redirect()->route('event.show', [
