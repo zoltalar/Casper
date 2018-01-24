@@ -29029,11 +29029,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.open = false;
                 this.phrase = item.name;
             }
+        },
+        close: function close() {
+            var that = this;
+            setTimeout(function () {
+                that.open = false;
+            }, 100);
         }
     },
     watch: {
         items: function items(_items) {
             this.open = _items.length > 0;
+
+            if (this.items != _items) {
+                this.index = null;
+            }
         },
         phrase: function phrase(_phrase) {
             if (_phrase == '') {

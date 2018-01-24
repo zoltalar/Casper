@@ -55,11 +55,21 @@
                     this.open = false;
                     this.phrase = item.name;
                 }
+            },
+            close() {
+                let that = this;
+                setTimeout(function() {
+                    that.open = false;
+                }, 100);
             }
         },
         watch: {
             items: function(_items) {
                 this.open = (_items.length > 0);
+
+                if (this.items != _items) {
+                    this.index = null;
+                }
             },
             phrase: function(_phrase) {
                 if (_phrase == '') {
