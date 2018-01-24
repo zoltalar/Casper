@@ -2,7 +2,7 @@
     <h3 class="mb-4">Event Options</h3>
     @if ( (int) $event->public == 1)
         <p class="mb-4">
-            <a href="{{ route('event.attend', ['id' => $event->id]) }}" class="btn btn-info">Attend</a>
+            <a href="{{ route('event.attend', ['id' => $event->id]) }}" class="btn btn-info">@if ( ! $approved && ! $invited) Attend @else Cancel Attendance @endif</a>
         </p>
     @else
         {{ Form::open(['route' => 'event.invite', 'class' => 'form-inline mb-4', 'autocomplete' => 'off']) }}

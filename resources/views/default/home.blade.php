@@ -31,8 +31,12 @@
                         @else
                             <span class="badge badge-secondary">Private Event</span>
                         @endif
-                        @if ($_event->users()->get()->contains(auth()->id()))
-                            <span class="badge badge-success">Attending</span>
+                        @if ($_event->user() !== null)
+                            @if ( (int) $_event->user()->pivot->approved == 1)
+                                <span class="badge badge-success">Attending</span>
+                            @elseif ( (int) $_event->user()->pivot->invited == 1)
+                                <span class="badge badge-warning">Pending Invitation</span>
+                            @endif
                         @endif
                     </p>
                 </div>

@@ -54,9 +54,7 @@ class EventController extends Controller
         }
 
         $users = $event->users()->get();
-        $user = $users->filter(function($user) {
-            return $user->id == auth()->id();
-        })->first();
+        $user = $event->user();
 
         $invited = $approved = false;
 
@@ -78,10 +76,10 @@ class EventController extends Controller
 
         $id = auth()->id();
 
-        if ($event->users()->get()->contains($id)) {
-            $event->users()->detach($id);
-        } else {
+        if ($event->user() === null) {
             $event->users()->attach($id, ['approved' => 1]);
+        } else {
+            $event->users()->detach($id);
         }
 
         return redirect()->route('event.show', [

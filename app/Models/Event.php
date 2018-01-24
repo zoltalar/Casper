@@ -24,6 +24,32 @@ class Event extends Base implements Address, Coordinates, Userstamp
             ->withPivot(['invited', 'approved']);
     }
 
+    /**
+     * Retrieve user information for an event.
+     *
+     * @param   int $id user id
+     * @return  \App\Models\User|null
+     */
+    public function user($id = null)
+    {
+        if ($id === null) {
+            $id = auth()->id();
+        }
+
+        return $this
+            ->users()
+            ->get()
+            ->filter(function($user) use ($id) {
+                return $user->id == $id;
+            })
+            ->first();
+    }
+
+    /**
+     * Event meta information.
+     *
+     * @return  string
+     */
     public function meta()
     {
         $meta = [$this->date];
