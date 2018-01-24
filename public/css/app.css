@@ -12948,6 +12948,10 @@ textarea {
   resize: none;
 }
 
+.auto-complete .dropdown-menu {
+  width: 100%;
+}
+
 .inner {
   margin: 30px 0;
 }

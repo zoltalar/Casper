@@ -6,7 +6,10 @@
     <div class="collapse navbar-collapse" id="navbar-primary">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">Home</a></li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
             @auth
+                <li class="nav-item"><span class="navbar-text">Hello {{ auth()->user()->first_name }}</span></li>
                 <li class="nav-item"><a href="{{ route('home') }}" class="nav-link" v-on:click="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
             @else
                 <li class="nav-item"><a href="{{ route('login') }}" class="nav-link"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a></li>

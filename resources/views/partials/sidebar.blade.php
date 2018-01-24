@@ -2,25 +2,33 @@
     <h3 class="mb-4">Event Options</h3>
     @if ( (int) $event->public == 1)
         <p class="mb-4">
-            <a href="{{ route('event.attend', ['id' => $event->id]) }}" class="btn btn-info">@if ($attend) Attend @else Unattend @endif</a>
+            <a href="{{ route('event.attend', ['id' => $event->id]) }}" class="btn btn-info">Attend</a>
         </p>
     @else
-        {{ Form::open(['route' => 'event.invite', 'class' => 'form-inline', 'autocomplete' => 'off']) }}
+        {{ Form::open(['route' => 'event.invite', 'class' => 'form-inline mb-4', 'autocomplete' => 'off']) }}
             <div class="form-group">
                 <autocomplete :source="'/users/load'"></autocomplete>
             </div>
             <div class="form-group ml-2">
                 {{ Form::submit('Invite') }}
             </div>
+            {{ Form::hidden('event_id', $event->id) }}
         {{ Form::close() }}
     @endif
     @if ($users->count() > 0)
         <h5>Attendees</h5>
-        <ul>
+        <ul class="mb-4">
             @foreach ($users as $_user)
-                <li>{{ $_user->fullName() }}</li>
+                <li>{{ $_user->fullName() }} @if ( (int) $_user->pivot->approved == 0) <small class="text-warning text-uppercase">(Pending Approval)</small> @endif</li>
             @endforeach
         </ul>
+    @endif
+    @if ($invited && ! $approved)
+        <h5>Pending Invitation</h5>
+        <p class="mb-0">
+            <a href="{{ route('event.approve', ['id' => $event->id]) }}" class="btn btn-primary mr-1">Approve</a>
+            <a href="{{ route('event.reject', ['id' => $event->id]) }}" class="btn btn-danger">Reject</a>
+        </p>
     @endif
 @else
     <h3 class="mb-4">Filter Events</h3>

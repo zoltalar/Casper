@@ -1,15 +1,14 @@
 <template>
-    <div class="btn-group">
+    <div class="auto-complete btn-group">
         <input type="text" class="form-control" v-model="phrase" @keyup="load()">
         <input type="hidden" name="id" v-model="id">
         <div class="dropdown-menu" :class="{ 'show': open }">
-            <a href="#" class="dropdown-item" v-for="(item, index) in items" @click="pick(index)">{{ item.name }}</a>
+            <a href="#" class="dropdown-item" v-for="(item, i) in items" @click="pick(i, $event)">{{ item.name }}</a>
         </div>
     </div>
 </template>
 <script>
     import axios from 'axios'
-    import _ from 'underscore'
 
     export default {
         data() {
@@ -18,7 +17,8 @@
                 index: null,
                 phrase: '',
                 open: false,
-                items: []
+                items: [],
+                timer: null
             }
         },
         props: {
@@ -30,7 +30,10 @@
         methods: {
             load() {
                 let that = this;
-                setTimeout(function() {
+                if (this.timer != null) {
+                    clearTimeout(this.timer);
+                }
+                this.timer = setTimeout(function() {
                     axios
                         .get(that.url())
                         .then(response => {
@@ -41,7 +44,9 @@
             url() {
                 return this.source + '?phrase=' + encodeURIComponent(this.phrase);
             },
-            pick(index) {
+            pick(index, event) {
+                event.preventDefault();
+
                 if (this.items[index]) {
                     let item = this.items[index];
 
@@ -50,12 +55,16 @@
                     this.open = false;
                     this.phrase = item.name;
                 }
-                return false;
             }
         },
         watch: {
-            items: function(newItems) {
-                this.open = (newItems.length > 0);
+            items: function(_items) {
+                this.open = (_items.length > 0);
+            },
+            phrase: function(_phrase) {
+                if (_phrase == '') {
+                    this.id = null;
+                }
             }
         }
     }

@@ -53,15 +53,19 @@ class EventController extends Controller
             return redirect()->route('home');
         }
 
-        $id = auth()->id();
         $users = $event->users()->get();
-        $attend = true;
+        $user = $users->filter(function($user) {
+            return $user->id == auth()->id();
+        })->first();
 
-        if ($users->contains($id)) {
-            $attend = false;
+        $invited = $approved = false;
+
+        if ($user !== null) {
+            $invited = (bool) $user->pivot->invited;
+            $approved = (bool) $user->pivot->approved;
         }
 
-        return view('events/show', compact('event', 'attend', 'users'));
+        return view('events/show', compact('event', 'invited', 'approved', 'users'));
     }
 
     public function attend($id)
@@ -77,8 +81,77 @@ class EventController extends Controller
         if ($event->users()->get()->contains($id)) {
             $event->users()->detach($id);
         } else {
-            $event->users()->attach($id);
+            $event->users()->attach($id, ['approved' => 1]);
         }
+
+        return redirect()->route('event.show', [
+            'name' => str_slug($event->name),
+            'id' => $event->id
+        ]);
+    }
+
+    public function invite()
+    {
+        $data = request()->only(['id', 'event_id']);
+        $data['user_id'] = null;
+
+        if ( ! empty($data['id'])) {
+            $data['user_id'] = decrypt($data['id']);
+        }
+
+        unset($data['id']);
+        $id = $data['event_id'];
+        $event = Event::find($id);
+
+        if ($event === null) {
+            return redirect()->route('home');
+        }
+
+        $rules = [
+            'user_id' => 'required|exists:users,id',
+            'event_id' => 'required|exists:events,id'
+        ];
+
+        $validator = Validator::make($data, $rules);
+
+        if ($validator->passes()) {
+            $id = $data['user_id'];
+            $event->users()->attach($id, ['invited' => 1]);
+        }
+
+        return redirect()->route('event.show', [
+            'name' => str_slug($event->name),
+            'id' => $event->id
+        ]);
+    }
+
+    public function approve($id)
+    {
+        $event = Event::find($id);
+
+        if ($event === null) {
+            return redirect()->route('home');
+        }
+
+        $id = auth()->id();
+        $event->users()->updateExistingPivot($id, ['approved' => 1]);
+
+        return redirect()->route('event.show', [
+            'name' => str_slug($event->name),
+            'id' => $event->id
+        ]);
+    }
+
+    public function reject($id)
+    {
+        $event = Event::find($id);
+
+        if ($event === null) {
+            return redirect()->route('home');
+        }
+
+        $id = auth()->id();
+        $event->users()->detach($id);
 
         return redirect()->route('event.show', [
             'name' => str_slug($event->name),

@@ -19,7 +19,9 @@ class Event extends Base implements Address, Coordinates, Userstamp
 
     public function users()
     {
-        return $this->belongsToMany('App\Models\User', 'events_users');
+        return $this
+            ->belongsToMany('App\Models\User', 'events_users')
+            ->withPivot(['invited', 'approved']);
     }
 
     public function meta()

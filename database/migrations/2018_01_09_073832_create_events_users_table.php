@@ -16,6 +16,8 @@ class CreateEventsUsersTable extends Migration
         Schema::create('events_users', function (Blueprint $table) {
             $table->integer('event_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->boolean('invited')->default(0)->nullable();
+            $table->boolean('approved')->default(0)->nullable();
 
             $table->primary(['event_id', 'user_id']);
 
