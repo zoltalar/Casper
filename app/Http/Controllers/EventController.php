@@ -160,4 +160,17 @@ class EventController extends Controller
             'id' => $event->id
         ]);
     }
+
+    public function destroy($id)
+    {
+        $event = Event::find($id);
+
+        if ($event !== null) {
+            if ($event->created_by == auth()->id()) {
+                $event->delete();
+            }
+        }
+
+        return redirect()->route('home');
+    }
 }

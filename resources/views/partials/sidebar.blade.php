@@ -3,6 +3,9 @@
     @if ( (int) $event->public == 1)
         <p class="mb-4">
             <a href="{{ route('event.attend', ['id' => $event->id]) }}" class="btn btn-info">@if ( ! $approved && ! $invited) Attend @else Cancel Attendance @endif</a>
+            @if ($event->created_by == auth()->id())
+                <a href="{{ route('event.destroy', ['id' => $event->id]) }}" class="btn btn-danger ml-1">Delete</a>
+            @endif
         </p>
     @else
         {{ Form::open(['route' => 'event.invite', 'class' => 'form-inline mb-4', 'autocomplete' => 'off']) }}

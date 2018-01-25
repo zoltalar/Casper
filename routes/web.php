@@ -17,6 +17,7 @@ Route::get('/', ['as' => 'home', 'uses' => 'DefaultController@home']);
 
 Route::get('events/attend/{id}', ['as' => 'event.attend', 'uses' => 'EventController@attend']);
 Route::get('events/approve/{id}', ['as' => 'event.approve', 'uses' => 'EventController@approve']);
+Route::get('events/destroy/{id}', ['as' => 'event.destroy', 'uses' => 'EventController@destroy']);
 Route::get('events/reject/{id}', ['as' => 'event.reject', 'uses' => 'EventController@reject']);
 Route::get('events/{name}/{id}', ['as' => 'event.show', 'uses' => 'EventController@show']);
 Route::get('events/create', ['as' => 'event.create', 'uses' => 'EventController@create']);

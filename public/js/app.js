@@ -28989,7 +28989,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             id: null,
-            index: null,
+            index: -1,
             phrase: '',
             open: false,
             items: [],
@@ -29004,7 +29004,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
-        load: function load() {
+        load: function load(event) {
+            if (event.keyCode == 13) {
+                return false;
+            }
             var that = this;
             if (this.timer != null) {
                 clearTimeout(this.timer);
@@ -29030,6 +29033,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.phrase = item.name;
             }
         },
+        next: function next() {
+            if (this.count > 0) {
+                this.index++;
+
+                if (this.index > this.count - 1) {
+                    this.index = this.count - 1;
+                }
+            }
+        },
+        previous: function previous() {
+            if (this.count > 0) {
+                this.index--;
+
+                if (this.index < 0) {
+                    this.index = 0;
+                }
+            }
+        },
         close: function close() {
             var that = this;
             setTimeout(function () {
@@ -29037,12 +29058,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }, 100);
         }
     },
+    computed: {
+        count: function count() {
+            return this.items.length;
+        }
+    },
     watch: {
         items: function items(_items) {
             this.open = _items.length > 0;
 
-            if (this.items != _items) {
-                this.index = null;
+            if (this.items.length != _items.length) {
+                this.index = -1;
             }
         },
         phrase: function phrase(_phrase) {
@@ -29965,9 +29991,38 @@ var render = function() {
       attrs: { type: "text" },
       domProps: { value: _vm.phrase },
       on: {
-        keyup: function($event) {
-          _vm.load()
-        },
+        keydown: [
+          function($event) {
+            _vm.load($event)
+          },
+          function($event) {
+            if (
+              !("button" in $event) &&
+              _vm._k($event.keyCode, "enter", 13, $event.key)
+            ) {
+              return null
+            }
+            _vm.pick(_vm.index, $event)
+          },
+          function($event) {
+            if (
+              !("button" in $event) &&
+              _vm._k($event.keyCode, "up", 38, $event.key)
+            ) {
+              return null
+            }
+            _vm.previous()
+          },
+          function($event) {
+            if (
+              !("button" in $event) &&
+              _vm._k($event.keyCode, "down", 40, $event.key)
+            ) {
+              return null
+            }
+            _vm.next()
+          }
+        ],
         input: function($event) {
           if ($event.target.composing) {
             return
@@ -30001,6 +30056,7 @@ var render = function() {
           "a",
           {
             staticClass: "dropdown-item",
+            class: { active: i == _vm.index },
             attrs: { href: "#" },
             on: {
               click: function($event) {
