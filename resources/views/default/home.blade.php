@@ -14,7 +14,7 @@
             <div class="card bg-light border-0 mb-4">
                 <div class="card-body">
                     <h5 class="mb-3">
-                        <a href="{{ route('event.show', ['name' => str_slug($_event->name), 'id' => $_event->id]) }}">{{ $_event->name }}</a>
+                        <a href="{{ route('event.show', ['name' => str_slug($_event->name), 'event' => $_event]) }}">{{ $_event->name }}</a>
                     </h5>
                     <p class="text-muted mb-1">
                         {{ $_event->meta() }}

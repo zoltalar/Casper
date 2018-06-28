@@ -34,10 +34,8 @@ class EventController extends Controller
         return redirect()->route('home');
     }
 
-    public function show($name, $id)
+    public function show($name, Event $event = null)
     {
-        $event = Event::find($id);
-
         if ($event === null) {
             return redirect()->route('home');
         }
@@ -55,10 +53,8 @@ class EventController extends Controller
         return view('events/show', compact('event', 'invited', 'approved', 'users'));
     }
 
-    public function attend($id)
+    public function attend(Event $event = null)
     {
-        $event = Event::find($id);
-
         if ($event === null) {
             return redirect()->route('home');
         }
@@ -73,7 +69,7 @@ class EventController extends Controller
 
         return redirect()->route('event.show', [
             'name' => str_slug($event->name),
-            'id' => $event->id
+            'event' => $event
         ]);
     }
 
@@ -116,10 +112,8 @@ class EventController extends Controller
         ]);
     }
 
-    public function approve($id)
+    public function approve(Event $event = null)
     {
-        $event = Event::find($id);
-
         if ($event === null) {
             return redirect()->route('home');
         }
@@ -129,14 +123,12 @@ class EventController extends Controller
 
         return redirect()->route('event.show', [
             'name' => str_slug($event->name),
-            'id' => $event->id
+            'event' => $event
         ]);
     }
 
-    public function reject($id)
+    public function reject(Event $event = null)
     {
-        $event = Event::find($id);
-
         if ($event === null) {
             return redirect()->route('home');
         }
@@ -146,18 +138,16 @@ class EventController extends Controller
 
         return redirect()->route('event.show', [
             'name' => str_slug($event->name),
-            'id' => $event->id
+            'event' => $event
         ]);
     }
 
-    public function destroy($id)
+    public function destroy(Event $event = null)
     {
-        $event = Event::find($id);
-
-        if ($event !== null) {
-            if ($event->created_by == auth()->id()) {
+        if ($event !== null && $event->created_by == auth()->id()) {
+            try {
                 $event->delete();
-            }
+            } catch (\Exception $e) {}
         }
 
         return redirect()->route('home');

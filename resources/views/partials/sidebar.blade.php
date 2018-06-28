@@ -2,9 +2,9 @@
     <h3 class="mb-4">Event Options</h3>
     @if ( (int) $event->public == 1)
         <p class="mb-4">
-            <a href="{{ route('event.attend', ['id' => $event->id]) }}" class="btn btn-info">@if ( ! $approved && ! $invited) Attend @else Cancel Attendance @endif</a>
+            <a href="{{ route('event.attend', ['event' => $event]) }}" class="btn btn-info">@if ( ! $approved && ! $invited) Attend @else Cancel Attendance @endif</a>
             @if ($event->created_by == auth()->id())
-                <a href="{{ route('event.destroy', ['id' => $event->id]) }}" class="btn btn-danger ml-1">Delete</a>
+                <a href="{{ route('event.destroy', ['event' => $event]) }}" class="btn btn-danger ml-1">Delete</a>
             @endif
         </p>
     @else
@@ -29,8 +29,8 @@
     @if ($invited && ! $approved)
         <h5>Pending Invitation</h5>
         <p class="mb-0">
-            <a href="{{ route('event.approve', ['id' => $event->id]) }}" class="btn btn-primary mr-1">Approve</a>
-            <a href="{{ route('event.reject', ['id' => $event->id]) }}" class="btn btn-danger">Reject</a>
+            <a href="{{ route('event.approve', ['event' => $event]) }}" class="btn btn-primary mr-1">Approve</a>
+            <a href="{{ route('event.reject', ['event' => $event]) }}" class="btn btn-danger">Reject</a>
         </p>
     @endif
 @else
