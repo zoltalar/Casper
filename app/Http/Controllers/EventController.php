@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
+use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use App\Models\State;
+use Validator;
 
 class EventController extends Controller
 {
@@ -22,27 +23,15 @@ class EventController extends Controller
         return view('events/create', compact('states'));
     }
 
-    public function store()
+    public function store(EventRequest $request)
     {
-        $rules = Event::rules();
-        $data = request()->all();
-        $validator = Validator::make($data, $rules);
+        $event = new Event();
+        $event->fill($request->only($event->getUnguarded()));
+        $event->save();
 
-        if ($validator->fails()) {
-            return redirect()
-                ->route('event.create')
-                ->withErrors($validator)
-                ->withInput();
-        } else {
-            $event = new Event();
-            $event->fill($data);
+        session()->flash('message', 'Event has been created successfully.');
 
-            if ($event->save()) {
-                session()->flash('message', 'Event has been created successfully.');
-            }
-
-            return redirect()->route('home');
-        }
+        return redirect()->route('home');
     }
 
     public function show($name, $id)

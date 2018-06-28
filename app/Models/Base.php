@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Schema;
 
 abstract class Base extends Model
 {
@@ -14,6 +15,22 @@ abstract class Base extends Model
      * @var array
      */
     protected $deleteConstraints = [];
+
+    /**
+     * Get unguarded attributes.
+     *
+     * @return  array
+     */
+    public function getUnguarded()
+    {
+        $unguarded = [];
+
+        if (!$this->totallyGuarded()) {
+            $unguarded = array_diff(Schema::getColumnListing($this->getTable()), $this->getGuarded());
+        }
+
+        return $unguarded;
+    }
 
     /**
      * Override

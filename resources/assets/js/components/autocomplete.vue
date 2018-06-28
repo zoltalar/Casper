@@ -100,6 +100,7 @@
             phrase: function(_phrase) {
                 if (_phrase == '') {
                     this.id = null;
+                    this.index = -1;
                 }
             }
         }

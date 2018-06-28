@@ -22,7 +22,7 @@
         <h5>Attendees</h5>
         <ul class="mb-4">
             @foreach ($users as $_user)
-                <li>{{ $_user->fullName() }} @if ( (int) $_user->pivot->approved == 0) <small class="text-warning text-uppercase">(Pending Approval)</small> @endif</li>
+                <li>{{ $_user->fullName(false) }} @if ( (int) $_user->pivot->approved == 0) <small class="text-warning text-uppercase">(Pending Approval)</small> @endif</li>
             @endforeach
         </ul>
     @endif

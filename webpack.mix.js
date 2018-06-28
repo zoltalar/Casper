@@ -12,5 +12,6 @@ let mix = require('laravel-mix');
  */
 
 mix
+    .copy('node_modules/ol/ol.css', 'public/css/ol.css')
     .js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css');

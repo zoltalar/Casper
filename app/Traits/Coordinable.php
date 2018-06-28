@@ -40,8 +40,9 @@ trait Coordinable
         if ( ! empty($address)) {
             $url = 'https://maps.google.com/maps/api/geocode/json?address=%s&key=%s';
             $url = sprintf($url, urlencode($address), urlencode(self::$key));
+            $options = ['ssl' => ['verify_peer' => false, 'verify_peer_name' => false]];
 
-            if ($contents = file_get_contents($url)) {
+            if ($contents = file_get_contents($url, false, stream_context_create($options))) {
                 $response = json_decode($contents);
 
                 if (isset($response->results[0]->geometry->location)) {

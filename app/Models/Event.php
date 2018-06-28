@@ -20,7 +20,7 @@ class Event extends Base implements Address, Coordinates, Userstamp
     public function users()
     {
         return $this
-            ->belongsToMany('App\Models\User', 'events_users')
+            ->belongsToMany(User::class, 'events_users')
             ->withPivot(['invited', 'approved']);
     }
 
@@ -60,26 +60,6 @@ class Event extends Base implements Address, Coordinates, Userstamp
         }
 
         return implode(' ', $meta);
-    }
-
-    public static function rules(array $keys = null)
-    {
-        $rules = [
-            'name' => 'required|string',
-            'description' => 'required|string',
-            'date' => 'required|date',
-            'address' => 'required|string',
-            'city' => 'required|string',
-            'state_id' => 'required',
-            'postal_code' => 'required|digits:5',
-            'max_attendees' => 'nullable|numeric'
-        ];
-
-        if ( ! empty($keys)) {
-            return array_only($rules, $keys);
-        }
-
-        return $rules;
     }
 
     public static function radii()

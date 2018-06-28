@@ -44,19 +44,18 @@ trait Addressable
         return $this->belongsTo('App\Models\State');
     }
 
-    public static function generateAddress(array $data, array $rules, $glue = '\n')
+    public static function generateAddress(array $data, $glue = '\n')
     {
-        $keys = ['address', 'address_2', 'city', 'state_id', 'postal_code'];
-        $data = array_only($data, $keys);
-        $rules = array_only($rules, $keys);
-        $validator = Validator::make($data, $rules);
-
-        if ($validator->passes()) {
-            $model = new static();
-            $model->fill($data);
-
-            return $model->address($glue);
-        }
+//        $keys = ['address', 'address_2', 'city', 'state_id', 'postal_code'];
+//        $data = array_only($data, $keys);
+//        $validator = Validator::make($data, $rules);
+//
+//        if ($validator->passes()) {
+//            $model = new static();
+//            $model->fill($data);
+//
+//            return $model->address($glue);
+//        }
 
         return null;
     }

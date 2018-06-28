@@ -14,11 +14,24 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        $radii = Event::radii();
+        $this->middleware(function ($request, $next) {
+            $this->vars();
+            return $next($request);
+        });
+    }
 
-        view()->share('address', null);
-        view()->share('coordinates', null);
-        view()->share('radii', $radii);
-        view()->share('radius', 5);
+    /**
+     * Push some globally used variables to controllers and/or views.
+     *
+     * @return  void
+     */
+    protected function vars()
+    {
+        view()->share([
+            'address' => null,
+            'coordinates' => null,
+            'radii' => Event::radii(),
+            'radius' => 5
+        ]);
     }
 }

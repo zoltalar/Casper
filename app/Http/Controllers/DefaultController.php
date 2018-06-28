@@ -10,10 +10,8 @@ class DefaultController extends Controller
     public function home()
     {
         $data = request()->all();
-        $rules = Event::rules();
         $radius = array_get($data, 'radius', 5);
-
-        $address = Event::generateAddress($data, $rules, ',');
+        $address = Event::generateAddress($data, ',');
         $coordinates = Event::resolveAddress($address);
 
         if ( ! $coordinates->empty()) {

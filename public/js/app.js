@@ -71,7 +71,7 @@
 
 
 var bind = __webpack_require__(7);
-var isBuffer = __webpack_require__(26);
+var isBuffer = __webpack_require__(27);
 
 /*global toString:true*/
 
@@ -408,7 +408,7 @@ module.exports = g;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(28);
+var normalizeHeaderName = __webpack_require__(29);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -13531,12 +13531,12 @@ module.exports = function bind(fn, thisArg) {
 
 
 var utils = __webpack_require__(0);
-var settle = __webpack_require__(29);
-var buildURL = __webpack_require__(31);
-var parseHeaders = __webpack_require__(32);
-var isURLSameOrigin = __webpack_require__(33);
+var settle = __webpack_require__(30);
+var buildURL = __webpack_require__(32);
+var parseHeaders = __webpack_require__(33);
+var isURLSameOrigin = __webpack_require__(34);
 var createError = __webpack_require__(9);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(34);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(35);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -13633,7 +13633,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(35);
+      var cookies = __webpack_require__(36);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -13717,7 +13717,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(30);
+var enhanceError = __webpack_require__(31);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -13778,7 +13778,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(13);
-module.exports = __webpack_require__(44);
+module.exports = __webpack_require__(45);
 
 
 /***/ }),
@@ -13793,6 +13793,7 @@ module.exports = __webpack_require__(44);
 
 __webpack_require__(14);
 window.Vue = __webpack_require__(16);
+window.ol = __webpack_require__(19);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -13800,8 +13801,8 @@ window.Vue = __webpack_require__(16);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('alert', __webpack_require__(19));
-Vue.component('autocomplete', __webpack_require__(22));
+Vue.component('alert', __webpack_require__(20));
+Vue.component('autocomplete', __webpack_require__(23));
 
 var app = new Vue({
     el: '#app',
@@ -28803,14 +28804,271 @@ exports.clearImmediate = clearImmediate;
 
 /***/ }),
 /* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+var _ol_ = {};
+
+
+/**
+ * Constants defined with the define tag cannot be changed in application
+ * code, but can be set at compile time.
+ * Some reduce the size of the build in advanced compile mode.
+ */
+
+
+/**
+ * @define {boolean} Assume touch.  Default is `false`.
+ */
+_ol_.ASSUME_TOUCH = false;
+
+
+/**
+ * TODO: rename this to something having to do with tile grids
+ * see https://github.com/openlayers/openlayers/issues/2076
+ * @define {number} Default maximum zoom for default tile grids.
+ */
+_ol_.DEFAULT_MAX_ZOOM = 42;
+
+
+/**
+ * @define {number} Default min zoom level for the map view.  Default is `0`.
+ */
+_ol_.DEFAULT_MIN_ZOOM = 0;
+
+
+/**
+ * @define {number} Default maximum allowed threshold  (in pixels) for
+ *     reprojection triangulation. Default is `0.5`.
+ */
+_ol_.DEFAULT_RASTER_REPROJECTION_ERROR_THRESHOLD = 0.5;
+
+
+/**
+ * @define {number} Default tile size.
+ */
+_ol_.DEFAULT_TILE_SIZE = 256;
+
+
+/**
+ * @define {string} Default WMS version.
+ */
+_ol_.DEFAULT_WMS_VERSION = '1.3.0';
+
+
+/**
+ * @define {boolean} Enable the Canvas renderer.  Default is `true`. Setting
+ *     this to false at compile time in advanced mode removes all code
+ *     supporting the Canvas renderer from the build.
+ */
+_ol_.ENABLE_CANVAS = true;
+
+
+/**
+ * @define {boolean} Enable integration with the Proj4js library.  Default is
+ *     `true`.
+ */
+_ol_.ENABLE_PROJ4JS = true;
+
+
+/**
+ * @define {boolean} Enable automatic reprojection of raster sources. Default is
+ *     `true`.
+ */
+_ol_.ENABLE_RASTER_REPROJECTION = true;
+
+
+/**
+ * @define {boolean} Enable the WebGL renderer.  Default is `true`. Setting
+ *     this to false at compile time in advanced mode removes all code
+ *     supporting the WebGL renderer from the build.
+ */
+_ol_.ENABLE_WEBGL = true;
+
+
+/**
+ * @define {boolean} Include debuggable shader sources.  Default is `true`.
+ *     This should be set to `false` for production builds (if `ol.ENABLE_WEBGL`
+ *     is `true`).
+ */
+_ol_.DEBUG_WEBGL = true;
+
+
+/**
+ * @define {number} The size in pixels of the first atlas image. Default is
+ * `256`.
+ */
+_ol_.INITIAL_ATLAS_SIZE = 256;
+
+
+/**
+ * @define {number} The maximum size in pixels of atlas images. Default is
+ * `-1`, meaning it is not used (and `ol.WEBGL_MAX_TEXTURE_SIZE` is
+ * used instead).
+ */
+_ol_.MAX_ATLAS_SIZE = -1;
+
+
+/**
+ * @define {number} Maximum mouse wheel delta.
+ */
+_ol_.MOUSEWHEELZOOM_MAXDELTA = 1;
+
+
+/**
+ * @define {number} Maximum width and/or height extent ratio that determines
+ * when the overview map should be zoomed out.
+ */
+_ol_.OVERVIEWMAP_MAX_RATIO = 0.75;
+
+
+/**
+ * @define {number} Minimum width and/or height extent ratio that determines
+ * when the overview map should be zoomed in.
+ */
+_ol_.OVERVIEWMAP_MIN_RATIO = 0.1;
+
+
+/**
+ * @define {number} Maximum number of source tiles for raster reprojection of
+ *     a single tile.
+ *     If too many source tiles are determined to be loaded to create a single
+ *     reprojected tile the browser can become unresponsive or even crash.
+ *     This can happen if the developer defines projections improperly and/or
+ *     with unlimited extents.
+ *     If too many tiles are required, no tiles are loaded and
+ *     `ol.TileState.ERROR` state is set. Default is `100`.
+ */
+_ol_.RASTER_REPROJECTION_MAX_SOURCE_TILES = 100;
+
+
+/**
+ * @define {number} Maximum number of subdivision steps during raster
+ *     reprojection triangulation. Prevents high memory usage and large
+ *     number of proj4 calls (for certain transformations and areas).
+ *     At most `2*(2^this)` triangles are created for each triangulated
+ *     extent (tile/image). Default is `10`.
+ */
+_ol_.RASTER_REPROJECTION_MAX_SUBDIVISION = 10;
+
+
+/**
+ * @define {number} Maximum allowed size of triangle relative to world width.
+ *     When transforming corners of world extent between certain projections,
+ *     the resulting triangulation seems to have zero error and no subdivision
+ *     is performed.
+ *     If the triangle width is more than this (relative to world width; 0-1),
+ *     subdivison is forced (up to `ol.RASTER_REPROJECTION_MAX_SUBDIVISION`).
+ *     Default is `0.25`.
+ */
+_ol_.RASTER_REPROJECTION_MAX_TRIANGLE_WIDTH = 0.25;
+
+
+/**
+ * @define {number} Tolerance for geometry simplification in device pixels.
+ */
+_ol_.SIMPLIFY_TOLERANCE = 0.5;
+
+
+/**
+ * @define {number} Texture cache high water mark.
+ */
+_ol_.WEBGL_TEXTURE_CACHE_HIGH_WATER_MARK = 1024;
+
+
+/**
+ * @define {string} OpenLayers version.
+ */
+_ol_.VERSION = 'v4.6.4';
+
+
+/**
+ * The maximum supported WebGL texture size in pixels. If WebGL is not
+ * supported, the value is set to `undefined`.
+ * @const
+ * @type {number|undefined}
+ */
+_ol_.WEBGL_MAX_TEXTURE_SIZE; // value is set in `ol.has`
+
+
+/**
+ * List of supported WebGL extensions.
+ * @const
+ * @type {Array.<string>}
+ */
+_ol_.WEBGL_EXTENSIONS; // value is set in `ol.has`
+
+
+/**
+ * Inherit the prototype methods from one constructor into another.
+ *
+ * Usage:
+ *
+ *     function ParentClass(a, b) { }
+ *     ParentClass.prototype.foo = function(a) { }
+ *
+ *     function ChildClass(a, b, c) {
+ *       // Call parent constructor
+ *       ParentClass.call(this, a, b);
+ *     }
+ *     ol.inherits(ChildClass, ParentClass);
+ *
+ *     var child = new ChildClass('a', 'b', 'see');
+ *     child.foo(); // This works.
+ *
+ * @param {!Function} childCtor Child constructor.
+ * @param {!Function} parentCtor Parent constructor.
+ * @function
+ * @api
+ */
+_ol_.inherits = function(childCtor, parentCtor) {
+  childCtor.prototype = Object.create(parentCtor.prototype);
+  childCtor.prototype.constructor = childCtor;
+};
+
+
+/**
+ * A reusable function, used e.g. as a default for callbacks.
+ *
+ * @return {undefined} Nothing.
+ */
+_ol_.nullFunction = function() {};
+
+
+/**
+ * Gets a unique ID for an object. This mutates the object so that further calls
+ * with the same object as a parameter returns the same value. Unique IDs are generated
+ * as a strictly increasing sequence. Adapted from goog.getUid.
+ *
+ * @param {Object} obj The object to get the unique ID for.
+ * @return {number} The unique ID for the object.
+ */
+_ol_.getUid = function(obj) {
+  return obj.ol_uid ||
+      (obj.ol_uid = ++_ol_.uidCounter_);
+};
+
+
+/**
+ * Counter for getUid.
+ * @type {number}
+ * @private
+ */
+_ol_.uidCounter_ = 0;
+/* harmony default export */ __webpack_exports__["default"] = (_ol_);
+
+
+/***/ }),
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(20)
+var __vue_script__ = __webpack_require__(21)
 /* template */
-var __vue_template__ = __webpack_require__(21)
+var __vue_template__ = __webpack_require__(22)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -28849,7 +29107,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28878,7 +29136,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -28919,15 +29177,15 @@ if (false) {
 }
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(23)
+var __vue_script__ = __webpack_require__(24)
 /* template */
-var __vue_template__ = __webpack_require__(43)
+var __vue_template__ = __webpack_require__(44)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -28966,12 +29224,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
@@ -29074,19 +29332,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         phrase: function phrase(_phrase) {
             if (_phrase == '') {
                 this.id = null;
+                this.index = -1;
             }
         }
     }
 });
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(25);
+module.exports = __webpack_require__(26);
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29094,7 +29353,7 @@ module.exports = __webpack_require__(25);
 
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(7);
-var Axios = __webpack_require__(27);
+var Axios = __webpack_require__(28);
 var defaults = __webpack_require__(2);
 
 /**
@@ -29129,14 +29388,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(11);
-axios.CancelToken = __webpack_require__(41);
+axios.CancelToken = __webpack_require__(42);
 axios.isCancel = __webpack_require__(10);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(42);
+axios.spread = __webpack_require__(43);
 
 module.exports = axios;
 
@@ -29145,7 +29404,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 /*!
@@ -29172,7 +29431,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29180,8 +29439,8 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(2);
 var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(36);
-var dispatchRequest = __webpack_require__(37);
+var InterceptorManager = __webpack_require__(37);
+var dispatchRequest = __webpack_require__(38);
 
 /**
  * Create a new instance of Axios
@@ -29258,7 +29517,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29277,7 +29536,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29310,7 +29569,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29338,7 +29597,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29413,7 +29672,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29473,7 +29732,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29548,7 +29807,7 @@ module.exports = (
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29591,7 +29850,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29651,7 +29910,7 @@ module.exports = (
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29710,18 +29969,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(0);
-var transformData = __webpack_require__(38);
+var transformData = __webpack_require__(39);
 var isCancel = __webpack_require__(10);
 var defaults = __webpack_require__(2);
-var isAbsoluteURL = __webpack_require__(39);
-var combineURLs = __webpack_require__(40);
+var isAbsoluteURL = __webpack_require__(40);
+var combineURLs = __webpack_require__(41);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -29803,7 +30062,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29830,7 +30089,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29851,7 +30110,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29872,7 +30131,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29936,7 +30195,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29970,7 +30229,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -30081,7 +30340,7 @@ if (false) {
 }
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
