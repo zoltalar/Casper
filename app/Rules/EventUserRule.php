@@ -7,19 +7,20 @@ use Illuminate\Contracts\Validation\Rule;
 
 class EventUserRule implements Rule
 {
+    protected $data = [];
+    protected $userId;
     protected $event;
     protected $user;
-    protected $userId;
 
     public function __construct(array $data)
     {
-        $eventId = array_get($data, 'event_id');
-        $userId = array_get($data, 'user_id');
-
+        $this->data = $data;
+        $this->userId = array_get($this->data, 'user_id');
+        $eventId = array_get($this->data, 'event_id');
         $this->event = Event::find($eventId);
 
         if ($this->event !== null) {
-            $this->user = $this->event->user($userId);
+            $this->user = $this->event->user($this->userId);
         }
     }
 
@@ -41,9 +42,9 @@ class EventUserRule implements Rule
         }
 
         if ($invited) {
-            return 'The user is already invited to this event.';
+            return 'Specified user is already invited to this event.';
         }
 
-        return 'The user is already attending this event.';
+        return 'Specified user is already attending this event.';
     }
 }
