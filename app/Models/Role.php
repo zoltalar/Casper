@@ -12,6 +12,6 @@ class Role extends Base
 
     public function users()
     {
-        return $this->belongsToMany('App\Models\User', 'roles_users');
+        return $this->belongsToMany(User::class, 'roles_users');
     }
 }

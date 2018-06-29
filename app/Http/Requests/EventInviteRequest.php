@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\EventUserRule;
+
 class EventInviteRequest extends Base
 {
     // Override
@@ -28,7 +30,7 @@ class EventInviteRequest extends Base
     public function rules()
     {
         return [
-            'user_id' => 'required|exists:users,id',
+            'user_id' => ['required', 'exists:users,id', new EventUserRule($this->validationData())],
             'event_id' => 'required|exists:events,id'
         ];
     }

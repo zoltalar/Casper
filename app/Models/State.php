@@ -12,7 +12,7 @@ class State extends Base
 
     public function country()
     {
-        return $this->belongsTo('App\Models\Country');
+        return $this->belongsTo(Country::class);
     }
 
     /**

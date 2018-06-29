@@ -24,12 +24,12 @@ class User extends Base implements AuthenticatableContract, AuthorizableContract
 
     public function events()
     {
-        return $this->belongsToMany('App\Models\Event', 'events_users');
+        return $this->belongsToMany(Event::class, 'events_users');
     }
 
     public function roles()
     {
-        return $this->belongsToMany('App\Models\Role', 'roles_users');
+        return $this->belongsToMany(Role::class, 'roles_users');
     }
 
     public static function genders()
