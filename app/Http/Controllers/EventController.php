@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventInviteRequest;
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use App\Models\State;
@@ -11,9 +12,9 @@ class EventController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
-
         parent::__construct();
+
+        $this->middleware('auth')->except('show');
     }
 
     public function create()
@@ -73,42 +74,24 @@ class EventController extends Controller
         ]);
     }
 
-    public function invite()
+    public function invite(EventInviteRequest $request)
     {
-        $data = request()->only(['id', 'event_id']);
-        $data['user_id'] = null;
+        $eventId = $request->get('event_id');
+        $userId = $request->get('id');
 
-        if ( ! empty($data['id'])) {
-            $data['user_id'] = decrypt($data['id']);
+        if ( ! empty($userId)) {
+            $userId = decrypt($userId);
         }
 
-        unset($data['id']);
-        $id = $data['event_id'];
-        $event = Event::find($id);
+        $event = Event::find($eventId);
 
-        if ($event === null) {
-            return redirect()->route('home');
-        }
-
-        $rules = [
-            'user_id' => 'required|exists:users,id',
-            'event_id' => 'required|exists:events,id'
-        ];
-
-        $validator = Validator::make($data, $rules);
-
-        if ($validator->passes()) {
-            $id = $data['user_id'];
-            $user = $event->user($id);
-
-            if ($user === null) {
-                $event->users()->attach($id, ['invited' => 1]);
-            }
+        if ($event !== null) {
+            $event->users()->attach($userId, ['invited' => 1]);
         }
 
         return redirect()->route('event.show', [
             'name' => str_slug($event->name),
-            'id' => $event->id
+            'event' => $event
         ]);
     }
 

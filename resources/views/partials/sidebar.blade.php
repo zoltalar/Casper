@@ -15,6 +15,11 @@
             <div class="form-group ml-2">
                 {{ Form::submit('Invite') }}
             </div>
+            @if ($errors->any())
+                <div class="invalid-feedback d-block">
+                    {{ $errors->first() }}
+                </div>
+            @endif
             {{ Form::hidden('event_id', $event->id) }}
         {{ Form::close() }}
     @endif
