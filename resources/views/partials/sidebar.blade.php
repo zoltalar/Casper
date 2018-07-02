@@ -43,26 +43,51 @@
     @if ( ! empty($address) && ! $coordinates->empty())
         <p class="mb-4">Searching within {{ $radius }} mile radius of <mark>{{ $address }}</mark>. <a href="{{ route('home') }}">Change</a></p>
     @else
-        {{ Form::open(['route' => 'home', 'method' => 'get']) }}
+        {{ Form::open(['route' => 'event.filter', 'method' => 'POST']) }}
             <div class="form-group">
                 {{ Form::label('input-address', 'Address') }}
                 {{ Form::text('address', null, ['required' => 'required']) }}
+                @if ($errors->has('address'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('address') }}
+                    </div>
+                @endif
             </div>
             <div class="form-group">
                 {{ Form::label('input-city', 'City') }}
                 {{ Form::text('city', null, ['required' => 'required']) }}
+                @if ($errors->has('city'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('city') }}
+                    </div>
+                @endif
             </div>
             <div class="form-group">
                 {{ Form::label('input-state-id', 'State') }}
-                {{ Form::select('state_id', \App\Models\State::states(), null, ['required' => 'required']) }}
+                {{ Form::select('state_id', ['' => ''] + \App\Models\State::states(), null, ['required' => 'required']) }}
+                @if ($errors->has('state_id'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('state_id') }}
+                    </div>
+                @endif
             </div>
             <div class="form-group">
                 {{ Form::label('input-postal-code', 'Postal Code') }}
                 {{ Form::text('postal_code', null, ['required' => 'required']) }}
+                @if ($errors->has('postal_code'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('postal_code') }}
+                    </div>
+                @endif
             </div>
             <div class="form-group">
                 {{ Form::label('input-radius', 'Radius') }}
-                {{ Form::select('radius', $radii, null, ['required' => 'required']) }}
+                {{ Form::select('radius', ['' => ''] + $radii, null, ['required' => 'required']) }}
+                @if ($errors->has('radius'))
+                    <div class="invalid-feedback">
+                        {{ $errors->first('radius') }}
+                    </div>
+                @endif
             </div>
             <div class="form-group">
                 {{ Form::submit('Filter') }}

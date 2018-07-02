@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EventFilterRequest;
 use App\Http\Requests\EventInviteRequest;
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
@@ -134,5 +135,10 @@ class EventController extends Controller
         }
 
         return redirect()->route('home');
+    }
+
+    public function filter(EventFilterRequest $request)
+    {
+        
     }
 }

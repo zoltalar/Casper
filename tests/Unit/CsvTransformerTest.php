@@ -4,8 +4,6 @@ namespace Tests\Unit;
 
 use App\Transformers\CsvRowTransformer;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CsvTransformerTest extends TestCase
 {
@@ -30,8 +28,8 @@ class CsvTransformerTest extends TestCase
     {
         $transformer = new CsvRowTransformer();
         $transformer->setHeaders($this->data[0]);
-        $item = $transformer->transformItem($this->data[1]);
+        $item = $transformer->transformItem($this->data[3]);
 
-        $this->assertEquals('Odit et libero impedit voluptatem deserunt', $item['name']);
+        $this->assertEquals('Eum hic voluptas', $item['name']);
     }
 }
