@@ -13,10 +13,10 @@ class CsvTransformerTest extends TestCase
 
     public function setUp()
     {
-        $this->data = $this->getData();
+        $this->data = $this->data();
     }
 
-    protected function getData()
+    protected function data()
     {
         return [
             ['id', 'name', 'description', 'date'],
@@ -32,6 +32,6 @@ class CsvTransformerTest extends TestCase
         $transformer->setHeaders($this->data[0]);
         $item = $transformer->transformItem($this->data[1]);
 
-        $this->assertEquals('Eum hic voluptas', $item['name']);
+        $this->assertEquals('Odit et libero impedit voluptatem deserunt', $item['name']);
     }
 }

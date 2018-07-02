@@ -10,7 +10,13 @@ class CsvRowTransformer extends Base
     {
         $transformedItem = [];
 
-
+        if (count($this->headers) > 0) {
+            foreach ($this->headers as $index => $header) {
+                $transformedItem[$header] = array_get($item, $index);
+            }
+        } else {
+            $transformedItem = $item;
+        }
 
         return $transformedItem;
     }
