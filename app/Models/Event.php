@@ -3,13 +3,12 @@
 namespace App\Models;
 
 use App\Contracts\Address;
-use App\Contracts\Coordinates;
 use App\Contracts\Userstamp;
 use App\Traits\Addressable;
 use App\Traits\Coordinable;
 use App\Traits\Userstampable;
 
-class Event extends Base implements Address, Coordinates, Userstamp
+class Event extends Base implements Address, Userstamp
 {
     use Addressable, Coordinable, Userstampable;
 

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Coordinates;
 use App\Models\Event;
-use App\Services\AddressGeneratorService;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -12,6 +12,10 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected $address;
+    protected $coordinates;
+    protected $radius;
 
     public function __construct()
     {
@@ -28,13 +32,22 @@ class Controller extends BaseController
      */
     protected function vars()
     {
-        $address = (new AddressGeneratorService(session()->get('filter.event', [])))->get(',');
+        $this->address = session()->get('filter.event.address');
+
+        $latitude = session()->get('filter.event.coordinates.0');
+        $longitude = session()->get('filter.event.coordinates.1');
+
+        $this->coordinates = (new Coordinates())
+            ->setLatitude($latitude)
+            ->setLongitude($longitude);
+
+        $this->radius = session()->get('filter.event.radius', 5);
 
         view()->share([
-            'address' => $address,
-            'coordinates' => null,
+            'address' => $this->address,
+            'coordinates' => $this->coordinates,
             'radii' => Event::radii(),
-            'radius' => 5
+            'radius' => $this->radius
         ]);
     }
 }

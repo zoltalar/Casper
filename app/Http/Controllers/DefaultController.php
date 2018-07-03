@@ -9,30 +9,15 @@ class DefaultController extends Controller
 {
     public function home()
     {
-        $data = request()->all();
-        $radius = array_get($data, 'radius', 5);
-        //$address = Event::generateAddress($data, ',');
-        //$coordinates = Event::resolveAddress($address);
+        $events = Event::query()
+            ->where('date', '>=', (new Carbon())->toDateString())
+            ->when(auth()->guest(), function($query) {
+                $query->where('public', 1);
+            })
+            ->orderBy('date', 'asc')
+            ->simplePaginate(4);
 
-        if (false /*! $coordinates->empty()*/) {
-            $latitude = $coordinates->latitude();
-            $longitude = $coordinates->longitude();
-
-            $events = Event::haversine($latitude, $longitude);
-        } else {
-            $events = Event::where('id', '>', 0)->take(10);
-        }
-
-        $events->where('date', '>=', Carbon::now()->format('Y-m-d'));
-
-        if (auth()->guest()) {
-            $events->where('public', 1);
-        }
-
-        $events->orderBy('date', 'asc');
-        $events = $events->simplePaginate(4);
-
-        $data = compact('coordinates', 'events', 'radius');
+        $data = compact('events');
 
         return view('default/home', $data);
     }

@@ -7,6 +7,8 @@ use App\Http\Requests\EventInviteRequest;
 use App\Http\Requests\EventRequest;
 use App\Models\Event;
 use App\Models\State;
+use App\Services\AddressGeneratorService;
+use App\Services\CoordinatesResolverService;
 use Validator;
 
 class EventController extends Controller
@@ -17,7 +19,7 @@ class EventController extends Controller
 
         $this
             ->middleware('auth')
-            ->except(['show', 'filter']);
+            ->except(['show', 'filter', 'unfilter']);
     }
 
     public function create()
@@ -141,7 +143,35 @@ class EventController extends Controller
 
     public function filter(EventFilterRequest $request)
     {
-        session()->put('filter.event', $request->except('_token'));
+        $address = (new AddressGeneratorService($request->all()))->get(',');
+        $coordinates = (new CoordinatesResolverService($address))->resolve();
+        $radius = $request->get('radius');
+
+        if ( ! empty($address) && ! $coordinates->empty()) {
+            session()->put('filter.event.address', $address);
+            session()->put('filter.event.coordinates', $coordinates->toArray());
+
+            if ( ! empty($radius)) {
+                session()->put('filter.event.radius', $radius);
+            }
+        } else {
+            session()->forget([
+                'filter.event.address',
+                'filter.event.coordinates',
+                'filter.event.radius'
+            ]);
+        }
+
+        return redirect()->route('home');
+    }
+
+    public function unfilter()
+    {
+        session()->forget([
+            'filter.event.address',
+            'filter.event.coordinates',
+            'filter.event.radius'
+        ]);
 
         return redirect()->route('home');
     }

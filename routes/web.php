@@ -25,6 +25,7 @@ Route::group(['prefix' => 'events'], function() {
     Route::post('store', ['as' => 'event.store', 'uses' => 'EventController@store']);
     Route::post('invite', ['as' => 'event.invite', 'uses' => 'EventController@invite']);
     Route::post('filter', ['as' => 'event.filter', 'uses' => 'EventController@filter']);
+    Route::get('unfilter', ['as' => 'event.unfilter', 'uses' => 'EventController@unfilter']);
 });
 
 Route::get('users/load', ['as' => 'user.load', 'uses' => 'UserController@load']);

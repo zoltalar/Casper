@@ -19,7 +19,8 @@ class CoordinatesResolverTest extends TestCase
     {
         $addresses = [
             '40 Tower Lane, Avon, Connecticut 06001, United States',
-            'Grójecka Street 1/3, Warszawa, mazowieckie 02019, Poland'
+            'Grójecka Street 1/3, Warszawa, mazowieckie 02019, Poland',
+            '...'
         ];
 
         return $addresses;
@@ -30,6 +31,13 @@ class CoordinatesResolverTest extends TestCase
         $coordinates = (new CoordinatesResolverService($this->addresses[0]))->resolve();
 
         $this->assertFalse($coordinates->empty());
+    }
+
+    public function testIfEmpty()
+    {
+        $coordinates = (new CoordinatesResolverService($this->addresses[2]))->resolve();
+
+        $this->assertTrue($coordinates->empty());
     }
 
     public function testInstanceOf()

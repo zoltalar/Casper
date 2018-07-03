@@ -2,7 +2,7 @@
 @section('content')
     @if (session()->has('message'))
         <alert class="alert-success">{{ session()->get('message') }}</alert>
-    @elseif ( ! empty($address))
+    @elseif (empty($address))
         <alert class="alert-danger">We were unable to determine latitude and longitude of the <strong>{{ $address }}</strong> address.</alert>
     @endif
     <h3 class="mb-4">Upcoming Events</h3>

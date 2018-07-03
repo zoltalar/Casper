@@ -37,7 +37,7 @@ class Coordinates
      */
     public function __toString()
     {
-        return implode(', ', [$this->getLatitude(), $this->getLongitude()]);
+        return implode(', ', $this->toArray());
     }
 
     /**
@@ -94,5 +94,15 @@ class Coordinates
     public function empty()
     {
         return $this->getLatitude() === null && $this->getLongitude() === null;
+    }
+
+    /**
+     * Convert to array.
+     *
+     * @return  array
+     */
+    public function toArray()
+    {
+        return [$this->getLatitude(), $this->getLongitude()];
     }
 }

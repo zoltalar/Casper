@@ -3,17 +3,11 @@
 namespace App\Traits;
 
 use App\Contracts\Address;
-use App\Coordinates;
+use App\Helpers\Coordinates;
+use App\Services\CoordinatesResolverService;
 
 trait Coordinable
 {
-    /**
-     * Google Maps API key.
-     *
-     * @var string
-     */
-    private static $key = 'AIzaSyDNtKQ2kM5ib1aEzdNC5LLs-SFzOeupNP8';
-
     /**
      * Boot coordinable trait for a model.
      *
@@ -21,40 +15,19 @@ trait Coordinable
      */
     public static function bootCoordinable()
     {
-        // Register model events to listen to
         static::saving(function($model) {
             if ($model instanceof Address) {
-                $address = $model->address(',');
-                $coordinates = $model->resolveAddress($address);
+                $coordinates = (new CoordinatesResolverService($model->address(',')))->resolve();
 
-                $model->latitude = $coordinates->latitude();
-                $model->longitude = $coordinates->longitude();
+                $model->latitude = $coordinates->getLatitude();
+                $model->longitude = $coordinates->getLongitude();
             }
         });
     }
 
-    public static function resolveAddress($address)
+    public function scopeHaversine($query, Coordinates $coordinates, $radius = 20)
     {
-        $coordinates = new Coordinates();
-
-        if ( ! empty($address)) {
-            $url = 'https://maps.google.com/maps/api/geocode/json?address=%s&key=%s';
-            $url = sprintf($url, urlencode($address), urlencode(self::$key));
-            $options = ['ssl' => ['verify_peer' => false, 'verify_peer_name' => false]];
-
-            if ($contents = file_get_contents($url, false, stream_context_create($options))) {
-                $response = json_decode($contents);
-
-                if (isset($response->results[0]->geometry->location)) {
-                    $location = $response->results[0]->geometry->location;
-
-                    $coordinates->latitude($location->lat);
-                    $coordinates->longitude($location->lng);
-                }
-            }
-        }
-
-        return $coordinates;
+        return $query;
     }
 
     public static function haversine($latitude, $longitude, $radius = 20)
