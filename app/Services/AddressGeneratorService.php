@@ -19,8 +19,6 @@ class AddressGeneratorService
     public function __construct(array $data)
     {
         $this->data = array_only($data, $this->fields);
-
-        return $this;
     }
 
     public function get($glue = '\n')

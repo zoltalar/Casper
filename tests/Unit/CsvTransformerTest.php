@@ -7,7 +7,7 @@ use Tests\TestCase;
 
 class CsvTransformerTest extends TestCase
 {
-    protected $data;
+    protected $data = [];
 
     public function setUp()
     {
