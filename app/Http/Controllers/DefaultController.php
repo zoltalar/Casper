@@ -11,12 +11,15 @@ class DefaultController extends Controller
     {
         $events = Event::query()
             ->where('date', '>=', (new Carbon())->toDateString())
+            ->when(!$this->coordinates->empty(), function($query) {
+                $query->haversine($this->coordinates, $this->radius);
+            })
             ->when(auth()->guest(), function($query) {
                 $query->where('public', 1);
             })
-            ->orderBy('date', 'asc')
-            ->simplePaginate(4);
+            ->orderBy('date', 'asc');
 
+        $events = $events->simplePaginate(4);
         $data = compact('events');
 
         return view('default/home', $data);

@@ -25,19 +25,21 @@ trait Coordinable
         });
     }
 
+    /**
+     * Dynamic scope for performing Haversine radius based search.
+     *
+     * @param   \Illuminate\Database\Eloquent\Builder $query
+     * @param   \App\Helpers\Coordinates; $coordinates
+     * @param   int $radius
+     * @return  \Illuminate\Database\Eloquent\Builder
+     */
     public function scopeHaversine($query, Coordinates $coordinates, $radius = 20)
     {
-        return $query;
-    }
+        $sql = '( 3959 * ACOS( COS( RADIANS(?) ) * COS( RADIANS( `latitude` ) ) * COS( RADIANS( `longitude` ) - RADIANS(?) ) + SIN( RADIANS(?) ) * SIN( RADIANS( `latitude` ) ) ) ) < ?';
 
-    public static function haversine($latitude, $longitude, $radius = 20)
-    {
-        $formula = '( 3959 * acos( cos( radians(?) ) * cos( radians( `latitude` ) ) * cos( radians( `longitude` ) - radians(?) ) + sin( radians(?) ) * sin( radians( `latitude` ) ) ) ) AS `distance`';
+        $latitude = $coordinates->getLatitude();
+        $longitude = $coordinates->getLongitude();
 
-        $models = static::select('*')
-            ->selectRaw($formula, [$latitude, $longitude, $latitude])
-            ->havingRaw('`distance` < ?', [$radius]);
-
-        return $models;
+        return $query->havingRaw($sql, [$latitude, $longitude, $latitude, $radius]);
     }
 }
