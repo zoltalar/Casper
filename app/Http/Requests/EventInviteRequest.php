@@ -27,6 +27,14 @@ class EventInviteRequest extends Base
         return true;
     }
 
+    public function attributes()
+    {
+        return [
+            'user_id' => 'user',
+            'event_id' => 'event'
+        ];
+    }
+
     public function rules()
     {
         return [

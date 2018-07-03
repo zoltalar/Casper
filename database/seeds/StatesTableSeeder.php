@@ -1,8 +1,8 @@
 <?php
 
-use App\CsvRowTransformer;
 use App\Models\Country;
 use App\Models\State;
+use App\Transformers\CsvRowTransformer;
 use Illuminate\Database\Seeder;
 
 class StatesTableSeeder extends Seeder
@@ -40,7 +40,7 @@ class StatesTableSeeder extends Seeder
                 if ($i == 0) {
                     $transformer->setHeaders($row);
                 } else {
-                    $row = $transformer->transform($row);
+                    $row = $transformer->transformItem($row);
 
                     if ( ! isset($cache[$row['country']])) {
                         $country = Country::where('name', $row['country'])

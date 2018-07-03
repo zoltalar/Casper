@@ -17,8 +17,8 @@ class UsersTableSeeder extends Seeder
         array_push($users, [
             'first_name' => 'John',
             'last_name' => 'Smith',
-            'email' => 'wojciech.pirog@polcode.net',
-            'nick' => 'wpirog',
+            'email' => 'admin@example.com',
+            'nick' => 'admin',
             'password' => bcrypt('welcome!'),
             'dob' => '1983-02-21',
             'gender' => 'm'
@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder
                 'email' => $faker->safeEmail,
                 'nick' => $faker->userName,
                 'password' => bcrypt('welcome!'),
-                'dob' => $faker->date('Y-m-d', '-20 years'),
+                'dob' => $faker->date('Y-m-d', '-24 years'),
                 'gender' => 'm'
             ]);
         }
