@@ -16,11 +16,22 @@ class AddressGeneratorService
         'postal_code'
     ];
 
+    /**
+     * Constructor.
+     *
+     * @param   array $data
+     */
     public function __construct(array $data)
     {
         $this->data = array_only($data, $this->fields);
     }
 
+    /**
+     * Get address.
+     *
+     * @param   string $glue
+     * @return  null|string
+     */
     public function get($glue = '\n')
     {
         if ( ! empty($this->data)) {
