@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Services\AddressGeneratorService;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -27,8 +28,10 @@ class Controller extends BaseController
      */
     protected function vars()
     {
+        $address = (new AddressGeneratorService(session()->get('filter.event', [])))->get(',');
+
         view()->share([
-            'address' => null,
+            'address' => $address,
             'coordinates' => null,
             'radii' => Event::radii(),
             'radius' => 5

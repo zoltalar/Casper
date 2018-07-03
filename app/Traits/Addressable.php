@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\State;
 use Validator;
 
 trait Addressable
@@ -41,22 +42,6 @@ trait Addressable
 
     public function state()
     {
-        return $this->belongsTo('App\Models\State');
-    }
-
-    public static function generateAddress(array $data, $glue = '\n')
-    {
-//        $keys = ['address', 'address_2', 'city', 'state_id', 'postal_code'];
-//        $data = array_only($data, $keys);
-//        $validator = Validator::make($data, $rules);
-//
-//        if ($validator->passes()) {
-//            $model = new static();
-//            $model->fill($data);
-//
-//            return $model->address($glue);
-//        }
-
-        return null;
+        return $this->belongsTo(State::class);
     }
 }

@@ -11,10 +11,10 @@ class DefaultController extends Controller
     {
         $data = request()->all();
         $radius = array_get($data, 'radius', 5);
-        $address = Event::generateAddress($data, ',');
-        $coordinates = Event::resolveAddress($address);
+        //$address = Event::generateAddress($data, ',');
+        //$coordinates = Event::resolveAddress($address);
 
-        if ( ! $coordinates->empty()) {
+        if (false /*! $coordinates->empty()*/) {
             $latitude = $coordinates->latitude();
             $longitude = $coordinates->longitude();
 
@@ -32,7 +32,7 @@ class DefaultController extends Controller
         $events->orderBy('date', 'asc');
         $events = $events->simplePaginate(4);
 
-        $data = compact( 'address', 'coordinates', 'events', 'radius');
+        $data = compact('coordinates', 'events', 'radius');
 
         return view('default/home', $data);
     }

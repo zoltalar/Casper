@@ -40,7 +40,7 @@
     @endif
 @else
     <h3 class="mb-4">Filter Events</h3>
-    @if ( ! empty($address) && ! $coordinates->empty())
+    @if ( ! empty($address))
         <p class="mb-4">Searching within {{ $radius }} mile radius of <mark>{{ $address }}</mark>. <a href="{{ route('home') }}">Change</a></p>
     @else
         {{ Form::open(['route' => 'event.filter', 'method' => 'POST']) }}

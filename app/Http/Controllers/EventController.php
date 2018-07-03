@@ -15,7 +15,9 @@ class EventController extends Controller
     {
         parent::__construct();
 
-        $this->middleware('auth')->except('show');
+        $this
+            ->middleware('auth')
+            ->except(['show', 'filter']);
     }
 
     public function create()
@@ -139,6 +141,8 @@ class EventController extends Controller
 
     public function filter(EventFilterRequest $request)
     {
-        
+        session()->put('filter.event', $request->except('_token'));
+
+        return redirect()->route('home');
     }
 }
