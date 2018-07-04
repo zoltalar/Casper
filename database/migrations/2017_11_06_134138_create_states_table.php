@@ -19,9 +19,9 @@ class CreateStatesTable extends Migration
             $table->string('name');
             $table->string('abbr', 5)->nullable();
 
-            $table->unique(['country_id', 'name'], 'unique_states_country_id_name');
+            $table->unique(['country_id', 'name']);
 
-            $table->foreign('country_id', 'fk_states_countries')
+            $table->foreign('country_id')
                 ->references('id')
                 ->on('countries')
                 ->onDelete('cascade');

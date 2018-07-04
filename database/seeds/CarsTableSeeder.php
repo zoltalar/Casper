@@ -1,15 +1,38 @@
 <?php
 
 use App\Models\Car;
+use App\Models\Manufacturer;
 use Illuminate\Database\Seeder;
 
 class CarsTableSeeder extends Seeder
 {
+    /**
+     * Manufacturer's name to ID cache.
+     *
+     * @var array
+     */
+    protected $cache = [];
+
     public function run()
     {
-        foreach ($this->cars() as $make => $models) {
+        foreach ($this->cars() as $name => $models) {
             foreach ($models as $model) {
-                Car::firstOrCreate(compact('make', 'model'));
+                $id = null;
+
+                if (isset($this->cache[$name])) {
+                    $id = $this->cache[$name];
+                } else {
+                    $manufacturer = Manufacturer::whereName($name)->first();
+
+                    if ($manufacturer !== null) {
+                        $id = $manufacturer->id;
+                        $this->cache[$name] = $id;
+                    }
+                }
+
+                if ($id !== null) {
+                    Car::firstOrCreate(['manufacturer_id' => $id, 'model' => $model]);
+                }
             }
         }
     }

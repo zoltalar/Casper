@@ -17,7 +17,7 @@ class CreateRolesTable extends Migration
             $table->smallIncrements('id');
             $table->string('name', 50);
 
-            $table->unique('name', 'unique_roles_name');
+            $table->unique('name');
         });
     }
 

@@ -21,12 +21,12 @@ class CreateEventsUsersTable extends Migration
 
             $table->primary(['event_id', 'user_id']);
 
-            $table->foreign('event_id', 'fk_events_users_events')
+            $table->foreign('event_id')
                 ->references('id')
                 ->on('events')
                 ->onDelete('cascade');
 
-            $table->foreign('user_id', 'fk_events_users_users')
+            $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');

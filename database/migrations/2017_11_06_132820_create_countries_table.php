@@ -18,8 +18,8 @@ class CreateCountriesTable extends Migration
             $table->string('name', 50);
             $table->string('code', '2');
 
-            $table->unique('name', 'unique_countries_name');
-            $table->unique('code', 'unique_countries_code');
+            $table->unique('name');
+            $table->unique('code');
         });
     }
 

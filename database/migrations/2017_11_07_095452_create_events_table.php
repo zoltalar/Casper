@@ -33,17 +33,17 @@ class CreateEventsTable extends Migration
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
 
-            $table->foreign('state_id', 'fk_events_states')
+            $table->foreign('state_id')
                 ->references('id')
                 ->on('states')
                 ->onDelete('set null');
 
-            $table->foreign('created_by', 'fk_events_creators')
+            $table->foreign('created_by')
                 ->references('id')
                 ->on('users')
                 ->onDelete('set null');
 
-            $table->foreign('updated_by', 'fk_events_editors')
+            $table->foreign('updated_by')
                 ->references('id')
                 ->on('users')
                 ->onDelete('set null');
