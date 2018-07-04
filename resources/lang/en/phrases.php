@@ -7,6 +7,7 @@ return [
     'approve' => 'Approve',
     'attend' => 'Attend',
     'attendees' => 'Attendees',
+    'attending' => 'Attending',
     'cancel' => 'Cancel',
     'cancel_attendance' => 'Cancel Attendance',
     'change' => 'Change',
