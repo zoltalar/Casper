@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-class Manufacturer extends Base
+class Make extends Base
 {
     public $timestamps = false;
 
-    protected $table = 'manufacturers';
+    protected $table = 'makes';
 
     protected $guarded = ['id'];
 }

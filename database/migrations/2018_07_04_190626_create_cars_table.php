@@ -10,14 +10,14 @@ class CreateCarsTable extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->increments('id');
-            $table->smallInteger('manufacturer_id')->unsigned();
+            $table->smallInteger('make_id')->unsigned();
             $table->string('model', 100);
 
-            $table->unique(['manufacturer_id', 'model']);
+            $table->unique(['make_id', 'model']);
 
-            $table->foreign('manufacturer_id')
+            $table->foreign('make_id')
                 ->references('id')
-                ->on('manufacturers')
+                ->on('makes')
                 ->onDelete('cascade');
         });
     }

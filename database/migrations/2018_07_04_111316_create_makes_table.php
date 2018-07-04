@@ -4,11 +4,11 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateManufacturersTable extends Migration
+class CreateMakesTable extends Migration
 {
     public function up()
     {
-        Schema::create('manufacturers', function (Blueprint $table) {
+        Schema::create('makes', function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->string('name', 100)->unique();
         });
@@ -16,6 +16,6 @@ class CreateManufacturersTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('manufacturers');
+        Schema::dropIfExists('makes');
     }
 }

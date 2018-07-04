@@ -1,13 +1,13 @@
 <?php
 
 use App\Models\Car;
-use App\Models\Manufacturer;
+use App\Models\Make;
 use Illuminate\Database\Seeder;
 
 class CarsTableSeeder extends Seeder
 {
     /**
-     * Manufacturer's name to ID cache.
+     * Make's name to ID cache.
      *
      * @var array
      */
@@ -17,21 +17,17 @@ class CarsTableSeeder extends Seeder
     {
         foreach ($this->cars() as $name => $models) {
             foreach ($models as $model) {
-                $id = null;
+                if ( ! isset($this->cache[$name])) {
+                    $make = Make::whereName($name)->first();
 
-                if (isset($this->cache[$name])) {
-                    $id = $this->cache[$name];
-                } else {
-                    $manufacturer = Manufacturer::whereName($name)->first();
-
-                    if ($manufacturer !== null) {
-                        $id = $manufacturer->id;
-                        $this->cache[$name] = $id;
+                    if ($make !== null) {
+                        $this->cache[$name] = $make->id;
                     }
                 }
 
-                if ($id !== null) {
-                    Car::firstOrCreate(['manufacturer_id' => $id, 'model' => $model]);
+                if (isset($this->cache[$name])) {
+                    $id = $this->cache[$name];
+                    Car::firstOrCreate(['make_id' => $id, 'model' => $model]);
                 }
             }
         }

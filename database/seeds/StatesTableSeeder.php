@@ -21,10 +21,16 @@ final class StatesTableSeeder extends Seeder
      */
     protected $path = 'database/seeds/csv/states/';
 
+    /**
+     * Country's name to ID cache.
+     *
+     * @var array
+     */
+    protected $cache = [];
+
     public function run()
     {
         $transformer = new CsvRowTransformer();
-        $cache = [];
 
         foreach ($this->files as $file) {
             $path = base_path($this->path) . $file;
@@ -42,19 +48,19 @@ final class StatesTableSeeder extends Seeder
                 } else {
                     $row = $transformer->transformItem($row);
 
-                    if ( ! isset($cache[$row['country']])) {
+                    if ( ! isset($this->cache[$row['country']])) {
                         $country = Country::where('name', $row['country'])
                             ->get()
                             ->first();
 
                         if ($country !== null) {
-                            $cache[$row['country']] = $country->id;
+                            $this->cache[$row['country']] = $country->id;
                         }
                     }
 
-                    if (isset($cache[$row['country']])) {
+                    if (isset($this->cache[$row['country']])) {
                         $state = [
-                            'country_id' => $cache[$row['country']],
+                            'country_id' => $this->cache[$row['country']],
                             'name' => $row['name'],
                             'abbr' => $row['abbr']
                         ];

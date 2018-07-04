@@ -1,23 +1,23 @@
 <?php
 
-use App\Models\Manufacturer;
+use App\Models\Make;
 use Illuminate\Database\Seeder;
 
-class ManufacturersTableSeeder extends Seeder
+class MakesTableSeeder extends Seeder
 {
     public function run()
     {
-        foreach ($this->manufacturers() as $manufacturer) {
-            Manufacturer::firstOrCreate(['name' => $manufacturer]);
+        foreach ($this->makes() as $make) {
+            Make::firstOrCreate(['name' => $make]);
         }
     }
 
     /**
-     * List of manufacturers to create.
+     * List of makes to create.
      *
      * @return  array
      */
-    protected function manufacturers()
+    protected function makes()
     {
         return [
             'Audi',
