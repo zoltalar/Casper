@@ -7,7 +7,7 @@
     @endif
     <h3 class="mb-4">Upcoming Events</h3>
     <p class="mb-4">
-        <a href="{{ route('event.create') }}" class="btn btn-info">Create Event</a>
+        <a href="{{ route('event.create') }}" class="btn btn-info">@lang('phrases.create_event')</a>
     </p>
     @if ($events->count() > 0)
         @foreach ($events as $_event)
@@ -27,15 +27,15 @@
                     </p>
                     <p class="mb-0">
                         @if ( (int) $_event->public == 1)
-                            <span class="badge badge-info">Public Event</span>
+                            <span class="badge badge-info">@lang('phrases.public_event')</span>
                         @else
-                            <span class="badge badge-secondary">Private Event</span>
+                            <span class="badge badge-secondary">@lang('phrases.private_event')</span>
                         @endif
                         @if ($_event->user() !== null)
                             @if ( (int) $_event->user()->pivot->approved == 1)
-                                <span class="badge badge-success">Attending</span>
+                                <span class="badge badge-success">@lang('phrases.attending')</span>
                             @elseif ( (int) $_event->user()->pivot->invited == 1)
-                                <span class="badge badge-warning">Pending Invitation</span>
+                                <span class="badge badge-warning">@lang('phrases.pending_invitation')</span>
                             @endif
                         @endif
                     </p>
@@ -44,6 +44,6 @@
         @endforeach
         {{ $events->links() }}
     @else
-        <p>No Events Found</p>
+        <p>@lang('messages.no_events')</p>
     @endif
-@endsection
+@stop

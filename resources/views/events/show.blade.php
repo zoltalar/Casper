@@ -10,6 +10,6 @@
     {!! \App\Extensions\Str::nl2p($event->description) !!}
     <hr class="mt-4 mb-4">
     <p>
-        <a href="{{ route('home') }}" class="btn btn-info">Go Back</a>
+        <a href="{{ route('home') }}" class="btn btn-info">@lang('phrases.go_back')</a>
     </p>
-@endsection
+@stop
