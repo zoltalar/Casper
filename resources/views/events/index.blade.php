@@ -3,9 +3,9 @@
     @if (session()->has('message'))
         <alert class="alert-success">{{ session()->get('message') }}</alert>
     @elseif ( ! empty($address) && $coordinates->empty())
-        <alert class="alert-danger">We were unable to determine latitude and longitude of the <strong>{{ $address }}</strong> address.</alert>
+        <alert class="alert-danger">@lang('messages.address_coordinates_error', ['address' => $address])</alert>
     @endif
-    <h3 class="mb-4">Upcoming Events</h3>
+    <h3 class="mb-4">@lang('phrases.upcoming_events')</h3>
     <p class="mb-4">
         <a href="{{ route('event.create') }}" class="btn btn-info">@lang('phrases.create_event')</a>
     </p>

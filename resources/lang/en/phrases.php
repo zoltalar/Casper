@@ -22,6 +22,7 @@ return [
     'email_address_or_nick' => 'Email Address or Nick',
     'event_name' => 'Event Name',
     'event_options' => 'Event Options',
+    'events' => 'Events',
     'filter' => 'Filter',
     'filter_events' => 'Filter Events',
     'first_name' => 'First Name',
@@ -50,5 +51,6 @@ return [
     'send_password_reset_link' => 'Send Password Reset Link',
     'state' => 'State',
     'time' => 'Time',
-    'toggle_navigation' => 'Toggle Navigation'
+    'toggle_navigation' => 'Toggle Navigation',
+    'upcoming_events' => 'Upcoming Events'
 ];

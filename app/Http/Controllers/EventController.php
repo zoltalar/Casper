@@ -19,7 +19,25 @@ class EventController extends Controller
 
         $this
             ->middleware('auth')
-            ->except(['show', 'filter', 'unfilter']);
+            ->except(['index', 'show', 'filter', 'unfilter']);
+    }
+
+    public function index()
+    {
+        $events = Event::query()
+            ->where('date', '>=', date('Y-m-d'))
+            ->when(!$this->coordinates->empty(), function($query) {
+                $query->haversine($this->coordinates, $this->radius);
+            })
+            ->when(auth()->guest(), function($query) {
+                $query->where('public', 1);
+            })
+            ->orderBy('date', 'asc')
+            ->simplePaginate(4);
+
+        $data = compact('events');
+
+        return view('events/index', $data);
     }
 
     public function create()

@@ -42,9 +42,9 @@ class EventUserRule implements Rule
         }
 
         if ($invited) {
-            return 'Specified user is already invited to this event.';
+            return __('messages.validation_event_user_already_invited');
         }
 
-        return 'Specified user is already attending this event.';
+        return __('messages.validation_event_user_already_attending');
     }
 }

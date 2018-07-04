@@ -16,6 +16,7 @@ Auth::routes();
 Route::get('/', ['as' => 'home', 'uses' => 'DefaultController@home']);
 
 Route::group(['prefix' => 'events'], function() {
+    Route::get('/', ['as' => 'event.index', 'uses' => 'EventController@index']);
     Route::get('attend/{event}', ['as' => 'event.attend', 'uses' => 'EventController@attend']);
     Route::get('approve/{event}', ['as' => 'event.approve', 'uses' => 'EventController@approve']);
     Route::get('destroy/{event}', ['as' => 'event.destroy', 'uses' => 'EventController@destroy']);

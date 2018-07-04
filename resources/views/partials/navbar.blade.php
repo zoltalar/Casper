@@ -5,7 +5,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbar-primary">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="{{ route('home') }}">@lang('phrases.home')</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('event.index') }}">@lang('phrases.events')</a></li>
         </ul>
         <ul class="navbar-nav ml-auto">
             @auth
