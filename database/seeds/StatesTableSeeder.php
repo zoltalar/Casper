@@ -5,21 +5,21 @@ use App\Models\State;
 use App\Transformers\CsvRowTransformer;
 use Illuminate\Database\Seeder;
 
-class StatesTableSeeder extends Seeder
+final class StatesTableSeeder extends Seeder
 {
     /**
      * CSV files to import.
      *
      * @var array
      */
-    private $files = ['poland.csv', 'usa.csv'];
+    protected $files = ['poland.csv', 'usa.csv'];
 
     /**
      * Path where the CSV files are located.
      *
      * @var string
      */
-    private $path = 'database/seeds/csv/states/';
+    protected $path = 'database/seeds/csv/states/';
 
     public function run()
     {
@@ -59,7 +59,7 @@ class StatesTableSeeder extends Seeder
                             'abbr' => $row['abbr']
                         ];
 
-                        State::create($state);
+                        State::firstOrCreate(array_only($state, ['country_id', 'name']), $state);
                     }
                 }
 

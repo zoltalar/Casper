@@ -3,9 +3,21 @@
 use App\Models\Country;
 use Illuminate\Database\Seeder;
 
-class CountriesTableSeeder extends Seeder
+final class CountriesTableSeeder extends Seeder
 {
     public function run()
+    {
+        foreach ($this->countries() as $country) {
+            Country::firstOrCreate(array_only($country, ['name']), $country);
+        }
+    }
+
+    /**
+     * List of countries to create.
+     *
+     * @return  array
+     */
+    protected function countries()
     {
         $countries = [];
 
@@ -19,8 +31,6 @@ class CountriesTableSeeder extends Seeder
             'code' => 'us'
         ]);
 
-        foreach ($countries as $country) {
-            Country::create($country);
-        }
+        return $countries;
     }
 }

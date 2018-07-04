@@ -1,50 +1,64 @@
 <?php
 
-use App\Models\Country;
 use App\Models\Event;
-use App\Models\State;
 use Illuminate\Database\Seeder;
 
-class EventsTableSeeder extends Seeder
+final class EventsTableSeeder extends Seeder
 {
     /**
-     * Number of events to generate.
+     * Number of events to create.
      *
      * @var int
      */
-    private $count = 5;
+    protected $count = 10;
 
     public function run()
     {
-        $faker = Faker\Factory::create();
-
-        for ($i=0; $i<$this->count; $i++) {
-            $address = $this->addresses(true);
-
-            $event = [
-                'name' => $faker->sentence(7),
-                'description' => $faker->paragraphs(rand(5,8), true),
-                'date' => $faker->dateTimeBetween('now', '+4 years')->format('Y-m-d'),
-                'time' => $faker->time(),
-                'public' => 1,
-                'address' => array_get($address, 'address'),
-                'address_2' => array_get($address, 'address_2'),
-                'city' => array_get($address, 'city'),
-                'state_id' => array_get($address, 'state_id'),
-                'postal_code' => array_get($address, 'postal_code')
-            ];
-
+        foreach ($this->events() as $event) {
             Event::create($event);
         }
     }
 
     /**
+     * List of events to create.
+     *
+     * @return  array
+     */
+    protected function events()
+    {
+        $events = [];
+
+        if ($this->count > 0) {
+            $faker = Faker\Factory::create();
+
+            for ($i=0; $i<$this->count; $i++) {
+                $address = $this->addresses(true);
+
+                array_push($events, [
+                    'name' => $faker->sentence(7),
+                    'description' => $faker->paragraphs(rand(5,8), true),
+                    'date' => $faker->dateTimeBetween('now', '+4 years')->format('Y-m-d'),
+                    'time' => $faker->time(),
+                    'public' => 1,
+                    'address' => array_get($address, 'address'),
+                    'address_2' => array_get($address, 'address_2'),
+                    'city' => array_get($address, 'city'),
+                    'state_id' => array_get($address, 'state_id'),
+                    'postal_code' => array_get($address, 'postal_code')
+                ]);
+            }
+        }
+
+        return $events;
+    }
+
+    /**
      * Retrieve single or a list of real addresses.
      *
-     * @param   boolean $random generate random address
-     * @return  \Illuminate\Support\Collection|mixed
+     * @param   boolean $random generate random real address
+     * @return  array
      */
-    public function addresses($random = false)
+    protected function addresses($random = false)
     {
         $addresses = [];
 
@@ -84,12 +98,11 @@ class EventsTableSeeder extends Seeder
             'postal_code' => '31147'
         ]);
 
-        $collection = collect($addresses);
-
         if ($random) {
-            return $collection->random();
+            shuffle($addresses);
+            return $addresses[mt_rand(0, count($addresses) - 1)];
         }
 
-        return $collection;
+        return $addresses;
     }
 }
