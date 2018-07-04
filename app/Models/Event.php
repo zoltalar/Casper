@@ -8,7 +8,7 @@ use App\Traits\Addressable;
 use App\Traits\Coordinable;
 use App\Traits\Userstampable;
 
-class Event extends Base implements Address, Userstamp
+final class Event extends Base implements Address, Userstamp
 {
     use Addressable, Coordinable, Userstampable;
 

@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class State extends Base
+final class State extends Base
 {
     public $timestamps = false;
 

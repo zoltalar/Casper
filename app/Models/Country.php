@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Country extends Base
+final class Country extends Base
 {
     const ID_POLAND = 1;
     const ID_UNITED_STATES = 2;

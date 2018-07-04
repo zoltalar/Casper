@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Role extends Base
+final class Role extends Base
 {
     public $timestamps = false;
 

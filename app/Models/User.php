@@ -12,7 +12,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Base implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, Name
+final class User extends Base implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, Name
 {
     use Authenticatable, Authorizable, CanResetPassword, Notifiable, Namable;
 
