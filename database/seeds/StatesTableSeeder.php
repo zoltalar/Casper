@@ -22,7 +22,7 @@ final class StatesTableSeeder extends Seeder
     protected $path = 'database/seeds/csv/states/';
 
     /**
-     * Country's name to ID cache.
+     * Country's name to country ID cache.
      *
      * @var array
      */

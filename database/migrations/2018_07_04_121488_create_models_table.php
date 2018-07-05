@@ -4,16 +4,14 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCarsTable extends Migration
+class CreateModelsTable extends Migration
 {
     public function up()
     {
-        Schema::create('cars', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create('models', function (Blueprint $table) {
+            $table->smallIncrements('id');
             $table->smallInteger('make_id')->unsigned();
-            $table->string('model', 100);
-
-            $table->unique(['make_id', 'model']);
+            $table->string('name', 100)->unique();
 
             $table->foreign('make_id')
                 ->references('id')
@@ -24,6 +22,6 @@ class CreateCarsTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('cars');
+        Schema::dropIfExists('models');
     }
 }

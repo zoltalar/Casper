@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Support\Facades\Schema;
 
-abstract class Base extends Model
+abstract class Base extends BaseModel
 {
     const DEFAULT_STRING_LENGTH = 191;
 

@@ -1,13 +1,13 @@
 <?php
 
-use App\Models\Car;
 use App\Models\Make;
+use App\Models\Model;
 use Illuminate\Database\Seeder;
 
-class CarsTableSeeder extends Seeder
+class ModelsTableSeeder extends Seeder
 {
     /**
-     * Make's name to ID cache.
+     * Make's name to make's ID cache.
      *
      * @var array
      */
@@ -15,32 +15,32 @@ class CarsTableSeeder extends Seeder
 
     public function run()
     {
-        foreach ($this->cars() as $name => $models) {
+        foreach ($this->models() as $make => $models) {
             foreach ($models as $model) {
-                if ( ! isset($this->cache[$name])) {
-                    $make = Make::whereName($name)->first();
+                if ( ! isset($this->cache[$make])) {
+                    $_make = Make::whereName($make)->first();
 
-                    if ($make !== null) {
-                        $this->cache[$name] = $make->id;
+                    if ($_make !== null) {
+                        $this->cache[$make] = $_make->id;
                     }
                 }
 
-                if (isset($this->cache[$name])) {
-                    $id = $this->cache[$name];
-                    Car::firstOrCreate(['make_id' => $id, 'model' => $model]);
+                if (isset($this->cache[$make])) {
+                    $id = $this->cache[$make];
+                    Model::firstOrCreate(['make_id' => $id, 'name' => $model]);
                 }
             }
         }
     }
 
     /**
-     * List of cars to create.
+     * List of car models to create.
      *
      * @return  array
      */
-    protected function cars()
+    protected function models()
     {
-        $cars = [
+        return [
             'Audi' => ['A1', 'A3', 'A4', 'Q2'],
             'BMW' => ['1 Series', '2 Series', '3 Series', 'X1'],
             'Ford' => ['C-MAX', 'EcoSport', 'Fiesta', 'Focus', 'Kuga', 'S-MAX'],
@@ -59,7 +59,5 @@ class CarsTableSeeder extends Seeder
             'Volkswagen' => ['Golf', 'Passat', 'Polo', 'Sharan', 'Touran'],
             'Volvo' => ['V40', 'XC40']
         ];
-
-        return $cars;
     }
 }

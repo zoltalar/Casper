@@ -13,7 +13,7 @@ class MakesTableSeeder extends Seeder
     }
 
     /**
-     * List of makes to create.
+     * List of car makes to create.
      *
      * @return  array
      */
