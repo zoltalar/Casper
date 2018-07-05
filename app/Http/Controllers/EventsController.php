@@ -11,7 +11,7 @@ use App\Services\AddressGeneratorService;
 use App\Services\CoordinatesResolverService;
 use Validator;
 
-class EventController extends Controller
+class EventsController extends Controller
 {
     public function __construct()
     {
@@ -91,7 +91,7 @@ class EventController extends Controller
             $event->users()->detach($id);
         }
 
-        return redirect()->route('event.show', [
+        return redirect()->route('events.show', [
             'name' => str_slug($event->name),
             'event' => $event
         ]);
@@ -112,7 +112,7 @@ class EventController extends Controller
             $event->users()->attach($userId, ['invited' => 1]);
         }
 
-        return redirect()->route('event.show', [
+        return redirect()->route('events.show', [
             'name' => str_slug($event->name),
             'event' => $event
         ]);
@@ -127,7 +127,7 @@ class EventController extends Controller
         $id = auth()->id();
         $event->users()->updateExistingPivot($id, ['approved' => 1]);
 
-        return redirect()->route('event.show', [
+        return redirect()->route('events.show', [
             'name' => str_slug($event->name),
             'event' => $event
         ]);
@@ -142,7 +142,7 @@ class EventController extends Controller
         $id = auth()->id();
         $event->users()->detach($id);
 
-        return redirect()->route('event.show', [
+        return redirect()->route('events.show', [
             'name' => str_slug($event->name),
             'event' => $event
         ]);

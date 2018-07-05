@@ -5,7 +5,7 @@
             <div class="card border-0">
                 <div class="card-header">@lang('phrases.create_event')</div>
                 <div class="card-body">
-                    {{ Form::open(['route' => 'event.store', 'table' => 'events']) }}
+                    {{ Form::open(['route' => 'events.store', 'table' => 'events']) }}
                         <div class="form-group">
                             {{ Form::label('input-name', __('phrases.event_name')) }}
                             {{ Form::text('name', null, ['required' => 'required', 'autofocus' => 'autofocus']) }}

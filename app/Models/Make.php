@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Make extends Base
+final class Make extends Base
 {
     public $timestamps = false;
 

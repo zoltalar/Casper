@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 
-class UserController extends Controller
+class UsersController extends Controller
 {
     public function load()
     {
         $users = User::search(['first_name', 'last_name', 'email'])
             ->where('id', '<>', auth()->id())
-            ->take(5)
+            ->take(8)
             ->get()
             ->map(function($user) {
                 return [

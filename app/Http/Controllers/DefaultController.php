@@ -6,6 +6,6 @@ class DefaultController extends Controller
 {
     public function home()
     {
-        return redirect()->route('event.index');
+        return redirect()->route('events.index');
     }
 }

@@ -7,14 +7,14 @@
     @endif
     <h3 class="mb-4">@lang('phrases.upcoming_events')</h3>
     <p class="mb-4">
-        <a href="{{ route('event.create') }}" class="btn btn-info">@lang('phrases.create_event')</a>
+        <a href="{{ route('events.create') }}" class="btn btn-info">@lang('phrases.create_event')</a>
     </p>
     @if ($events->count() > 0)
         @foreach ($events as $_event)
             <div class="card bg-light border-0 mb-4">
                 <div class="card-body">
                     <h5 class="mb-3">
-                        <a href="{{ route('event.show', ['name' => str_slug($_event->name), 'event' => $_event]) }}">{{ $_event->name }}</a>
+                        <a href="{{ route('events.show', ['name' => str_slug($_event->name), 'event' => $_event]) }}">{{ $_event->name }}</a>
                     </h5>
                     <p class="text-muted mb-1">
                         {{ $_event->meta() }}

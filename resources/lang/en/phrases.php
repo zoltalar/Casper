@@ -48,6 +48,7 @@ return [
     'reject' => 'Reject',
     'register' => 'Register',
     'remember_me' => 'Remember Me',
+    'rentals' => 'Rentals',
     'reset_password' => 'Reset Password',
     'send_password_reset_link' => 'Send Password Reset Link',
     'state' => 'State',

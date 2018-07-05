@@ -2,15 +2,15 @@
     <h3 class="mb-4">@lang('phrases.event_options')</h3>
     @if ( (int) $event->public == 1)
         <p class="mb-4">
-            <a href="{{ route('event.attend', ['event' => $event]) }}" class="btn btn-info">@if ( ! $approved && ! $invited) @lang('phrases.attend') @else @lang('phrases.cancel_attendance') @endif</a>
+            <a href="{{ route('events.attend', ['event' => $event]) }}" class="btn btn-info">@if ( ! $approved && ! $invited) @lang('phrases.attend') @else @lang('phrases.cancel_attendance') @endif</a>
             @if ($event->created_by == auth()->id())
-                <a href="{{ route('event.destroy', ['event' => $event]) }}" class="btn btn-danger ml-1">@lang('phrases.delete')</a>
+                <a href="{{ route('events.destroy', ['event' => $event]) }}" class="btn btn-danger ml-1">@lang('phrases.delete')</a>
             @endif
         </p>
     @else
-        {{ Form::open(['route' => 'event.invite', 'class' => 'form-inline mb-4', 'autocomplete' => 'off']) }}
+        {{ Form::open(['route' => 'events.invite', 'class' => 'form-inline mb-4', 'autocomplete' => 'off']) }}
             <div class="form-group">
-                <autocomplete :source="'/users/load'"></autocomplete>
+                <autocomplete :source="'{{ route('users.load') }}'"></autocomplete>
             </div>
             <div class="form-group ml-2">
                 {{ Form::submit(__('phrases.invite')) }}
@@ -34,17 +34,17 @@
     @if ($invited && ! $approved)
         <h5>@lang('phrases.pending_invitation')</h5>
         <p class="mb-0">
-            <a href="{{ route('event.approve', ['event' => $event]) }}" class="btn btn-primary mr-1">@lang('phrases.approve')</a>
-            <a href="{{ route('event.reject', ['event' => $event]) }}" class="btn btn-danger">@lang('phrases.reject')</a>
+            <a href="{{ route('events.approve', ['event' => $event]) }}" class="btn btn-primary mr-1">@lang('phrases.approve')</a>
+            <a href="{{ route('events.reject', ['event' => $event]) }}" class="btn btn-danger">@lang('phrases.reject')</a>
         </p>
     @endif
 @else
     <h3 class="mb-4">@lang('phrases.filter_events')</h3>
     @if ( ! empty($address))
-        <p class="mb-4">@lang('messages.proximity_search', ['radius' => $radius, 'address' => $address, 'coordinates' => $coordinates]) <a href="{{ route('event.unfilter') }}">@lang('phrases.change')</a></p>
+        <p class="mb-4">@lang('messages.proximity_search', ['radius' => $radius, 'address' => $address, 'coordinates' => $coordinates]) <a href="{{ route('events.unfilter') }}">@lang('phrases.change')</a></p>
     @else
         <p>@lang('messages.filter_events')</p>
-        {{ Form::open(['route' => 'event.filter', 'method' => 'POST']) }}
+        {{ Form::open(['route' => 'events.filter', 'method' => 'POST']) }}
             <div class="form-group">
                 {{ Form::label('input-address', __('phrases.address')) }}
                 {{ Form::text('address', null, ['required' => 'required']) }}

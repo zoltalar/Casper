@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class Car extends Base
+final class Car extends Base
 {
     public $timestamps = false;
 
