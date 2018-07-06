@@ -5,8 +5,8 @@
     </button>
     <div class="collapse navbar-collapse" id="navbar-primary">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a class="nav-link" href="{{ route('events.index') }}">@lang('phrases.events')</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ route('rentals.index') }}">@lang('phrases.rentals')</a></li>
+            <li class="nav-item"><a href="{{ route('events.index') }}" class="nav-link{{ (request()->is('events*') ? ' active' : '') }}">@lang('phrases.events')</a></li>
+            <li class="nav-item"><a href="{{ route('rentals.index') }}" class="nav-link{{ (request()->is('rentals*') ? ' active' : '') }}">@lang('phrases.rentals')</a></li>
         </ul>
         <ul class="navbar-nav ml-auto">
             @auth

@@ -4,7 +4,9 @@
 
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
 
-@import "variables";
+@import "_variables.scss";
+@import "_utilities.scss";
+
 @import "~bootstrap/scss/bootstrap";
 @import "~font-awesome/scss/font-awesome";
 
@@ -21,6 +23,16 @@ textarea {
 
   .dropdown-menu {
     width: 100%;
+  }
+}
+
+.color-box {
+  border-radius: 0;
+  height: 12px;
+  width: 12px;
+
+  &:empty {
+    display: inline-block;
   }
 }
 

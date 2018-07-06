@@ -1,5 +1,25 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
 
+.bg-blue {
+  background-color: blue;
+}
+
+.bg-brown {
+  background-color: brown;
+}
+
+.bg-cyan {
+  background-color: cyan;
+}
+
+.bg-red {
+  background-color: red;
+}
+
+.bg-yellow {
+  background-color: yellow;
+}
+
 /*!
  * Bootstrap v4.0.0-beta.3 (https://getbootstrap.com)
  * Copyright 2011-2017 The Bootstrap Authors
@@ -12950,6 +12970,16 @@ textarea {
 
 .auto-complete .dropdown-menu {
   width: 100%;
+}
+
+.color-box {
+  border-radius: 0;
+  height: 12px;
+  width: 12px;
+}
+
+.color-box:empty {
+  display: inline-block;
 }
 
 .inner {
