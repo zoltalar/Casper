@@ -4,7 +4,7 @@ use App\Models\Make;
 use App\Models\Model;
 use Illuminate\Database\Seeder;
 
-class ModelsTableSeeder extends Seeder
+final class ModelsTableSeeder extends Seeder
 {
     /**
      * Make's name to make's ID cache.
@@ -55,7 +55,7 @@ class ModelsTableSeeder extends Seeder
             'Seat' => ['Alhambra', 'Arona', 'Ateca', 'Ibiza', 'Mii'],
             'Skoda' => ['Citigo', 'Fabia', 'Karoq', 'Octavia', 'Rapid', 'Rapid Spaceback'],
             'Suzuki' => ['Baleno', 'Celerio', 'Ignis', 'Swift', 'Vitara'],
-            'Toyota' => ['Auris', 'AYGO', 'Prius', 'PROACE Verso', 'RAV4', 'Verso', 'Yaris'],
+            'Toyota' => ['Auris', 'AYGO', 'Camry', 'Prius', 'PROACE Verso', 'RAV4', 'Verso', 'Yaris'],
             'Volkswagen' => ['Golf', 'Passat', 'Polo', 'Sharan', 'Touran'],
             'Volvo' => ['V40', 'XC40']
         ];

@@ -3,7 +3,7 @@
 use App\Models\Make;
 use Illuminate\Database\Seeder;
 
-class MakesTableSeeder extends Seeder
+final class MakesTableSeeder extends Seeder
 {
     public function run()
     {

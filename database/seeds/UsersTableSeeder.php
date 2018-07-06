@@ -1,5 +1,6 @@
 <?php
 
+use App\Constants\Genders;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -33,9 +34,9 @@ final class UsersTableSeeder extends Seeder
             'last_name' => 'Smith',
             'email' => 'admin@example.com',
             'nick' => 'admin',
-            'password' => bcrypt('welcome!'),
+            'password' => bcrypt('test'),
             'dob' => '1983-02-21',
-            'gender' => 'm'
+            'gender' => Genders::MALE
         ]);
 
         if ($this->count > 0) {
@@ -47,9 +48,9 @@ final class UsersTableSeeder extends Seeder
                     'last_name' => $faker->lastName,
                     'email' => $faker->safeEmail,
                     'nick' => $faker->userName,
-                    'password' => bcrypt('welcome!'),
+                    'password' => bcrypt('test'),
                     'dob' => $faker->date('Y-m-d', '-24 years'),
-                    'gender' => 'm'
+                    'gender' => Genders::MALE
                 ]);
             }
         }

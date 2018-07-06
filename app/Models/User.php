@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Constants\Genders;
 use App\Contracts\Name;
 use App\Traits\Namable;
 use Illuminate\Auth\Authenticatable;
@@ -12,14 +13,23 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 
-final class User extends Base implements AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, Name
+final class User extends Base implements
+    AuthenticatableContract,
+    AuthorizableContract,
+    CanResetPasswordContract,
+    Name
 {
-    use Authenticatable, Authorizable, CanResetPassword, Notifiable, Namable;
+    use Authenticatable,
+        Authorizable,
+        CanResetPassword,
+        Notifiable,
+        Namable;
 
     protected $guarded = ['id'];
 
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token'
     ];
 
     public function events()
@@ -32,24 +42,17 @@ final class User extends Base implements AuthenticatableContract, AuthorizableCo
         return $this->belongsToMany(Role::class, 'roles_users');
     }
 
+    /**
+     * Genders array.
+     *
+     * @return  array
+     */
     public static function genders()
     {
-        return [
-            'm' => 'Male',
-            'f' => 'Female'
-        ];
-    }
-
-    public static function rules()
-    {
-        return [
-            'first_name' => 'required|string|max:100',
-            'last_name' => 'required|string|max:100',
-            'email' => 'required|string|email|unique:users',
-            'nick' => 'required|string|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'dob' => 'required|date',
-            'gender' => 'required'
-        ];
+        return collect(Genders::GENDERS)
+            ->mapWithKeys(function($gender) {
+                return [$gender => __('phrases.' . $gender)];
+            })
+            ->toArray();
     }
 }

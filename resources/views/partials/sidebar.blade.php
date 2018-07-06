@@ -27,7 +27,7 @@
         <h5>@lang('phrases.attendees')</h5>
         <ul class="mb-4">
             @foreach ($users as $_user)
-                <li>{{ $_user->fullName(false) }} @if ( (int) $_user->pivot->approved == 0) <small class="text-warning text-uppercase">(@lang('phrases.pending_approval')</small> @endif</li>
+                <li>{{ $_user->fullName(false) }} @if ( (int) $_user->pivot->approved == 0) <small class="text-warning text-uppercase">(@lang('phrases.pending_approval'))</small> @endif</li>
             @endforeach
         </ul>
     @endif

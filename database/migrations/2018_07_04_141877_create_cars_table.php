@@ -14,6 +14,7 @@ class CreateCarsTable extends Migration
             $table->smallInteger('year')->unsigned();
             $table->smallInteger('mileage')->unsigned()->nullable();
             $table->string('license_plate', 20);
+            $table->string('color', 30)->nullable();
 
             $table->foreign('model_id')
                 ->references('id')
