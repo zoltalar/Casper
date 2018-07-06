@@ -14,5 +14,6 @@ final class DatabaseSeeder extends Seeder
         $this->call(EventsTableSeeder::class);
         $this->call(MakesTableSeeder::class);
         $this->call(ModelsTableSeeder::class);
+        $this->call(CarsTableSeeder::class);
     }
 }

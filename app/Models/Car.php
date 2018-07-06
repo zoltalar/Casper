@@ -9,4 +9,9 @@ final class Car extends Base
     protected $table = 'cars';
 
     protected $guarded = ['id'];
+
+    public function model()
+    {
+        return $this->belongsTo(Model::class);
+    }
 }

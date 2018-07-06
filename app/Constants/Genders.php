@@ -2,7 +2,7 @@
 
 namespace App\Constants;
 
-class Genders
+final class Genders
 {
     const
         MALE = 'male',

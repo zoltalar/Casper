@@ -9,4 +9,9 @@ final class Make extends Base
     protected $table = 'makes';
 
     protected $guarded = ['id'];
+
+    public function models()
+    {
+        return $this->hasMany(Model::class);
+    }
 }

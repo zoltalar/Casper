@@ -9,4 +9,14 @@ final class Model extends Base
     protected $table = 'models';
 
     protected $guarded = ['id'];
+
+    public function make()
+    {
+        return $this->belongsTo(Make::class);
+    }
+
+    public function cars()
+    {
+        return $this->hasMany(Car::class);
+    }
 }
