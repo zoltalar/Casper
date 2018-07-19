@@ -1,7 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
 
+.bg-black {
+  background-color: black;
+}
+
 .bg-blue {
   background-color: blue;
+}
+
+.bg-bronze {
+  background-color: #cd7f32;
 }
 
 .bg-brown {
@@ -12,8 +20,24 @@
   background-color: cyan;
 }
 
+.bg-green {
+  background-color: green;
+}
+
 .bg-red {
   background-color: red;
+}
+
+.bg-silver {
+  background-color: silver;
+}
+
+.bg-teal {
+  background-color: teal;
+}
+
+.bg-violet {
+  background-color: violet;
 }
 
 .bg-yellow {

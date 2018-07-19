@@ -10,7 +10,7 @@
     @else
         {{ Form::open(['route' => 'events.invite', 'class' => 'form-inline mb-4', 'autocomplete' => 'off']) }}
             <div class="form-group">
-                <autocomplete :source="'{{ route('users.load') }}'"></autocomplete>
+                <auto-complete :source="'{{ route('users.load') }}'"></auto-complete>
             </div>
             <div class="form-group ml-2">
                 {{ Form::submit(__('phrases.invite')) }}

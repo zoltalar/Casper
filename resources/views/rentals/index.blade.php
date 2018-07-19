@@ -12,7 +12,7 @@
                             {{ strtolower(__('phrases.miles')) }}
                             <span class="badge color-box bg-{{ $car->color }} ml-1"></span>
                         </h6>
-                        <a href="#" class="btn btn-light btn-sm">@lang('phrases.rent')</a>
+                        <a href="{{ route('rentals.rent', ['id' => encrypt($car->id)]) }}" class="btn btn-light btn-sm">@lang('phrases.rent')</a>
                     </div>
                 </div>
             </div>

@@ -10,6 +10,6 @@
                 </div>
             </div>
         </div>
-        <script src="{{ asset('js/app.js') }}"></script>
+        @include('partials.footer-scripts')
     </body>
 </html>

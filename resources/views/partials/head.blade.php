@@ -4,6 +4,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Casper') }}</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/ol.css') }}" rel="stylesheet">
+    @include('partials.styles')
+    @yield('styles')
 </head>

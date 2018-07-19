@@ -6,7 +6,6 @@
 
 require('./bootstrap');
 window.Vue = require('vue');
-window.ol = require('ol');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -15,7 +14,8 @@ window.ol = require('ol');
  */
 
 Vue.component('alert', require('./components/alert'));
-Vue.component('autocomplete', require('./components/autocomplete'));
+Vue.component('auto-complete', require('./components/auto-complete'));
+Vue.component('date-range', require('./components/date-range'));
 
 const app = new Vue({
     el: '#app',

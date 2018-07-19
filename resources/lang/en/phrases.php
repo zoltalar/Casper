@@ -17,6 +17,7 @@ return [
     'create_event' => 'Create Event',
     'date' => 'Date',
     'date_of_birth' => 'Date of Birth',
+    'date_range' => 'Date Range',
     'delete' => 'Delete',
     'description' => 'Description',
     'email_address' => 'Email Address',

@@ -32,11 +32,13 @@
                 if (event.keyCode == 13) {
                     return false;
                 }
-                let that = this;
                 if (this.timer != null) {
                     clearTimeout(this.timer);
                 }
-                this.timer = setTimeout(function() {
+
+                let that = this;
+
+                this.timer = setTimeout(() => {
                     axios
                         .get(that.url())
                         .then(response => {
@@ -52,7 +54,6 @@
 
                 if (this.items[index]) {
                     let item = this.items[index];
-
                     this.index = index;
                     this.id = item.id;
                     this.open = false;
@@ -79,7 +80,7 @@
             },
             close() {
                 let that = this;
-                setTimeout(function() {
+                setTimeout(() => {
                     that.open = false;
                 }, 100);
             }
