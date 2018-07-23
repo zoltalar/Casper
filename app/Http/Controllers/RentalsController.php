@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RentalRequest;
 use App\Models\Car;
+use App\Models\Rental;
+use Carbon\Carbon;
 
 class RentalsController extends Controller
 {
@@ -30,6 +33,26 @@ class RentalsController extends Controller
             return redirect()->route('rentals.index');
         }
 
-        return view('rentals.rent', compact('car'));
+        $rental = new Rental();
+        $rental->from = (new Carbon())->startOfDay()->toDateTimeString();
+        $rental->to = (new Carbon())->endOfDay()->toDateTimeString();
+
+        return view('rentals.rent', compact('car', 'rental'));
+    }
+
+    public function store(RentalRequest $request)
+    {
+        $rental = new Rental();
+
+        $data = $request->only($rental->getUnguarded());
+        $data['user_id'] = decrypt($data['user_id']);
+        $data['car_id'] = decrypt($data['car_id']);
+
+        $rental->fill($data);
+        $rental->save();
+
+        session()->flash('message', 'You have successfully rented a car.');
+
+        return redirect()->route('rentals.index');
     }
 }

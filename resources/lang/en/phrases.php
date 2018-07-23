@@ -59,5 +59,6 @@ return [
     'state' => 'State',
     'time' => 'Time',
     'toggle_navigation' => 'Toggle Navigation',
-    'upcoming_events' => 'Upcoming Events'
+    'upcoming_events' => 'Upcoming Events',
+    'user' => 'User'
 ];

@@ -7,7 +7,7 @@ class EventFilterRequest extends Base
     public function attributes()
     {
         return [
-            'state_id' => 'state'
+            'state_id' => strtolower(__('phrases.state'))
         ];
     }
 
