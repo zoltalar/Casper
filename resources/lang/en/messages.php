@@ -2,6 +2,7 @@
 
 return [
     'address_coordinates_error' => 'We were unable to determine latitude and longitude of the <strong>:address</strong> address.',
+    'date_range_help' => 'Specify starting and ending dates for renting.',
     'hello' => 'Hello :name',
     'filter_events' => 'Show events close to your location.',
     'no_events' => 'No events found.',

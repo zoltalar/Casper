@@ -24,6 +24,10 @@
                 <div class="invalid-feedback d-block">
                     {{ $errors->first() }}
                 </div>
+            @else
+                <small class="form-text text-muted">
+                    @lang('messages.date_range_help')
+                </small>
             @endif
         </div>
         <div class="form-group">
