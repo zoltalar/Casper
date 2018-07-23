@@ -86,19 +86,19 @@
             }
         },
         computed: {
-            count: function() {
+            count() {
                 return this.items.length;
             }
         },
         watch: {
-            items: function(_items) {
+            items(_items) {
                 this.open = (_items.length > 0);
 
                 if (this.items.length != _items.length) {
                     this.index = -1;
                 }
             },
-            phrase: function(_phrase) {
+            phrase(_phrase) {
                 if (_phrase == '') {
                     this.id = null;
                     this.index = -1;

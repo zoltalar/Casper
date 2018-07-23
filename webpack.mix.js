@@ -13,7 +13,7 @@ let mix = require('laravel-mix');
 
 mix
     .copy('node_modules/bootstrap-daterangepicker', 'public/vendor/bootstrap-daterangepicker')
-    .copy('node_modules/jquery/dist', 'public/vendor/jquery')
+    .copy('node_modules/font-awesome', 'public/vendor/font-awesome')
     .copy('node_modules/ol/ol.css', 'public/vendor/ol/ol.css')
     .js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css');

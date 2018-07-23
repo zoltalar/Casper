@@ -16,7 +16,9 @@
         {{ Form::hidden('car_id', encrypt($car->id)) }}
         <div class="form-group">
             {{ Form::label('input-date-range', __('phrases.date_range')) }}
-            <date-range></date-range>
+            <date-range :start-target="'#input-from'" :end-target="'#input-to'"></date-range>
+            {{ Form::hidden('from', null, ['id' => 'input-from']) }}
+            {{ Form::hidden('to', null, ['id' => 'input-to']) }}
         </div>
     {{ Form::close() }}
 @stop

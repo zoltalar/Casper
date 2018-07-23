@@ -4,8 +4,12 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+window.$ = window.jQuery = require('jquery');
+window.Popper = require('popper.js').default;
 window.Vue = require('vue');
+
+require('bootstrap');
+require('bootstrap-daterangepicker');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -25,7 +29,7 @@ const app = new Vue({
         }
     },
     methods: {
-        logout: function(event) {
+        logout(event) {
             event.preventDefault();
             this.$refs.formLogout.submit();
         }
