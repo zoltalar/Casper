@@ -17,9 +17,7 @@ class EventsController extends Controller
     {
         parent::__construct();
 
-        $this
-            ->middleware('auth')
-            ->except(['index', 'show', 'filter', 'unfilter']);
+        $this->middleware('auth')->except(['index', 'show', 'filter', 'unfilter']);
     }
 
     public function index()

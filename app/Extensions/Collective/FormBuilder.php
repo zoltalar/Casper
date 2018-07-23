@@ -138,7 +138,8 @@ class FormBuilder extends \Collective\Html\FormBuilder
         $list = [],
         $selected = null,
         array $selectAttributes = [],
-        array $optionsAttributes = []
+        array $optionsAttributes = [],
+        array $optgroupsAttributes = []
     ) {
         $selectAttributes = $this->extendOptions($selectAttributes, $name, 'select');
 
@@ -146,6 +147,6 @@ class FormBuilder extends \Collective\Html\FormBuilder
             $selected = old($name);
         }
 
-        return parent::select($name, $list, $selected, $selectAttributes, $optionsAttributes);
+        return parent::select($name, $list, $selected, $selectAttributes, $optionsAttributes, $optgroupsAttributes);
     }
 }
