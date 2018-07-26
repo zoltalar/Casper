@@ -59,6 +59,7 @@ return [
     'send_password_reset_link' => 'Send Password Reset Link',
     'state' => 'State',
     'time' => 'Time',
+    'to' => 'To',
     'toggle_navigation' => 'Toggle Navigation',
     'upcoming_events' => 'Upcoming Events',
     'user' => 'User'

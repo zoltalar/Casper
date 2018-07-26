@@ -13,6 +13,8 @@ final class Rental extends Base implements Userstamp
 
     protected $guarded = ['id'];
 
+    protected $dates = ['from', 'to'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

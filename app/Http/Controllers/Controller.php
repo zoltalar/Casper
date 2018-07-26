@@ -47,7 +47,31 @@ class Controller extends BaseController
             'address' => $this->address,
             'coordinates' => $this->coordinates,
             'radii' => Event::radii(),
-            'radius' => $this->radius
+            'radius' => $this->radius,
+            'sidebars' => $this->sidebars()
         ]);
+    }
+
+    /**
+     * Generate sidebar view name variations.
+     *
+     * @return  array
+     */
+    protected function sidebars()
+    {
+        $route = request()->route();
+        $name = $route->getName();
+
+        if (strpos($name, '.') !== false) {
+            $prefix = explode('.', $name)[0];
+        } else {
+            $prefix = ltrim($route->getPrefix(), '/');
+        }
+
+        $name = str_replace('.', '-', $name);
+
+        return array_map(function($item) {
+            return 'partials.sidebar.' . $item;
+        }, [$name, $prefix, 'default']);
     }
 }
