@@ -6,7 +6,6 @@ use App\Http\Requests\RentalRequest;
 use App\Models\Car;
 use App\Models\Rental;
 use Carbon\Carbon;
-use Carbon\CarbonPeriod;
 
 class RentalsController extends Controller
 {
@@ -39,7 +38,7 @@ class RentalsController extends Controller
         return view('rentals.rent', compact('car', 'rental'));
     }
 
-    public function invalidDates(Car $car)
+    public function rentalDates(Car $car)
     {
         return response()->json($car->rentalDates());
     }

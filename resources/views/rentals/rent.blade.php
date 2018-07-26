@@ -17,7 +17,7 @@
         {{ Form::hidden('car_id', encrypt($car->id)) }}
         <div class="form-group">
             {{ Form::label('input-date-range', __('phrases.date_range')) }}
-            <date-range :start-target="'#input-from'" :end-target="'#input-to'" :invalid-dates-source="'{{ route('rentals.invalid-dates', ['car' => $car ]) }}'"></date-range>
+            <date-range :start-target="'#input-from'" :end-target="'#input-to'" :invalid-dates-source="'{{ route('rentals.rental-dates', ['car' => $car ]) }}'"></date-range>
             {{ Form::hidden('from', old('from', $rental->from), ['id' => 'input-from']) }}
             {{ Form::hidden('to', old('to', $rental->to), ['id' => 'input-to']) }}
             @if ($errors->any())

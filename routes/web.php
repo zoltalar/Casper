@@ -33,7 +33,7 @@ Route::group(['prefix' => 'rentals'], function() {
     Route::get('/', ['as' => 'rentals.index', 'uses' => 'RentalsController@index']);
     Route::get('rent/{id}', ['as' => 'rentals.rent', 'uses' => 'RentalsController@rent']);
     Route::post('store', ['as' => 'rentals.store', 'uses' => 'RentalsController@store']);
-    Route::get('invalid-dates/{car}', ['as' => 'rentals.invalid-dates', 'uses' => 'RentalsController@invalidDates']);
+    Route::get('rental-dates/{car}', ['as' => 'rentals.rental-dates', 'uses' => 'RentalsController@rentalDates']);
 });
 
 Route::get('users/load', ['as' => 'users.load', 'uses' => 'UsersController@load']);

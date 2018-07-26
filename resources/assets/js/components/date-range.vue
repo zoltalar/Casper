@@ -4,13 +4,15 @@
     </div>
 </template>
 <script>
+    import axios from 'axios'
     import moment from 'moment'
 
     export default {
         data() {
             return {
                 start: this.startDate,
-                end: this.endDate
+                end: this.endDate,
+                invalidDates: null
             }
         },
         props: {
@@ -31,6 +33,10 @@
             endTarget: {
                 type: String,
                 required: false
+            },
+            invalidDatesSource: {
+                type: String,
+                required: false
             }
         },
         computed: {
@@ -42,12 +48,32 @@
                 return start + ' - ' + end;
             }
         },
+        methods: {
+            url() {
+                return this.invalidDatesSource;
+            }
+        },
+        created() {
+            let url = this.url();
+
+            if (url) {
+                axios
+                    .get(url)
+                    .then(response => {
+                        this.invalidDates = response.data;
+                    });
+            }
+        },
         mounted() {
             let that = this;
 
             this.$nextTick(() => {
                 window.$(this.$el)
-                    .daterangepicker()
+                    .daterangepicker({
+                        isInvalidDate(date) {
+                            return $.inArray(date.format('YYYY-MM-DD'), (that.invalidDates || [])) !== -1;
+                        }
+                    })
                     .on('apply.daterangepicker', function (e, picker) {
                         that.$emit('apply', picker.startDate, picker.endDate);
                         that.start = picker.startDate;

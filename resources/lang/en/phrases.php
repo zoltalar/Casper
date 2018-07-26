@@ -11,6 +11,7 @@ return [
     'cancel' => 'Cancel',
     'cancel_attendance' => 'Cancel Attendance',
     'change' => 'Change',
+    'choose_date_range' => 'Choose Date Range',
     'city' => 'City',
     'confirm_password' => 'Confirm Password',
     'create' => 'Create',
