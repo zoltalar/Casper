@@ -5,7 +5,9 @@
             <div class="col-sm-4">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $car->model->make->name }} {{ $car->model->name }}</h5>
+                        <h5 class="card-title">
+                            <a href="{{ route('rentals.rent', ['id' => encrypt($car->id)]) }}" class="text-dark">{{ $car->model->make->name }} {{ $car->model->name }}</a>
+                        </h5>
                         <h6 class="card-subtitle text-muted small mb-3">
                             {{ $car->year }},
                             {{ number_format($car->mileage) }}
