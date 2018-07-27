@@ -61,6 +61,7 @@ return [
     'time' => 'Time',
     'to' => 'To',
     'toggle_navigation' => 'Toggle Navigation',
+    'unavailability_dates' => 'Unavailability Dates',
     'upcoming_events' => 'Upcoming Events',
     'user' => 'User'
 ];

@@ -1,5 +1,8 @@
 @extends('layouts.content-sidebar')
 @section('content')
+    @if (session()->has('message'))
+        <alert class="alert-success">{{ session()->get('message') }}</alert>
+    @endif
     <div class="row">
         @foreach ($cars as $car)
             <div class="col-sm-4">
