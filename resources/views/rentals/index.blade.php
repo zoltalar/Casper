@@ -3,6 +3,7 @@
     @if (session()->has('message'))
         <alert class="alert-success">{{ session()->get('message') }}</alert>
     @endif
+    <h3 class="mb-4">@lang('phrases.car_rentals')</h3>
     <div class="row">
         @foreach ($cars as $car)
             <div class="col-sm-4">

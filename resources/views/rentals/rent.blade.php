@@ -45,9 +45,9 @@
                         <li class="list-group-item @if ($rental->from->isPast() && $rental->to->isPast()) list-group-item-light @endif text-muted">
                             <i class="fa fa-clock-o mr-1"></i>
                             <small>
-                                {{ $rental->from->toDateString() }}
+                                {{ $rental->from->format('n/j/Y') }}
                                 {{ strtolower(__('phrases.to')) }}
-                                {{ $rental->to->toDateString() }}
+                                {{ $rental->to->format('n/j/Y') }}
                             </small>
                         </li>
                     @endforeach

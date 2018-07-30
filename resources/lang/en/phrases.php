@@ -10,6 +10,7 @@ return [
     'attending' => 'Attending',
     'cancel' => 'Cancel',
     'cancel_attendance' => 'Cancel Attendance',
+    'car_rentals' => 'Car Rentals',
     'change' => 'Change',
     'choose_date_range' => 'Choose Date Range',
     'city' => 'City',
