@@ -29,7 +29,7 @@ trait Coordinable
      * Dynamic scope for performing Haversine radius based search.
      *
      * @param   \Illuminate\Database\Eloquent\Builder $query
-     * @param   \App\Helpers\Coordinates; $coordinates
+     * @param   \App\Helpers\Coordinates $coordinates
      * @param   int $radius
      * @return  \Illuminate\Database\Eloquent\Builder
      */

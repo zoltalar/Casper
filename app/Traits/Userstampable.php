@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use App\Models\User;
+
 trait Userstampable
 {
     /**
@@ -27,11 +29,11 @@ trait Userstampable
 
     public function creator()
     {
-        return $this->belongsTo('App\Models\User', 'created_by');
+        return $this->belongsTo(User::class, 'created_by');
     }
 
     public function editor()
     {
-        return $this->belongsTo('App\Models\User', 'updated_by');
+        return $this->belongsTo(User::class, 'updated_by');
     }
 }
